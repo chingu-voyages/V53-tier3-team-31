@@ -8,7 +8,7 @@ To set this up add each teammates name in the `teammate name` column. Each
 team member should Place an 'X' under their name to vote for the ideas 
 you like the best.
 
-| No. | Question/Option | Umesh | Teammate name | Teammate name | Teammate name | Teammate name | Teammate name |
+| No. | Question/Option | Umesh | Suhani | Teammate name | Teammate name | Teammate name | Teammate name |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 1 | Team meeting schedule | | | | | | |
 |   |	- Sprint Planning Sunday@9:00 a.m. CST | | | | | | |
@@ -18,10 +18,10 @@ you like the best.
 |   |	- Notion | | | | | | |
 |   |	- Jira | | | | | | |
 | 3	| Technical Stack (vote by adding your pref. in the cell under your name) | | | | | | |
-|   |	- BE Language | Node | | | | | |
-|   |	- FE Language | JavaScript| | | | | |
-|   |	- FE Framework | React/Next.js | | | | | |
-|   |	- Database | Postgres | | | | | |
+|   |	- BE Language | Node | Node  | | | | |
+|   |	- FE Language | JavaScript| JavaScript | | | | |
+|   |	- FE Framework | React/Next.js | Nextjs | | | | |
+|   |	- Database | Postgres |Mongodb | | | | |
 |   |	- ML Framework | | | | | | |
 |   |	- Visualization/Graphics package (if required, e.g. D3, Nivo, etc.) | | | | | | |
 | 4	| Where to host the app? | | | | | | |
