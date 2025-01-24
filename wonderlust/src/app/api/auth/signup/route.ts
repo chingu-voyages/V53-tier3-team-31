@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
         const {user, email, password} = body 
         if (user && email && password) {
             const salt = await bcryptjs.genSalt(10)
-            const hashedPassword = await bcryptjs.hash(body.password, salt)  
+            const hashedPassword = await bcryptjs.hash(password, salt)  
 
             const userCheck = await User.findOne({email})
             
