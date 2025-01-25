@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import { FaGithub } from 'react-icons/fa';
@@ -36,6 +37,16 @@ export default function SignUp() {
             placeholder="Password"
           />
         </div>
+        <p className="text-sm my-1 text-gray-700">
+          Already have an account?
+          <Link
+            href="/login"
+            className="text-gray-500 hover:text-blue-800 font-semibold"
+          >
+            {' '}
+            Login
+          </Link>
+        </p>
         <button className="px-2 w-auto py-2 rounded-lg my-1 bg-gray-100 hover:bg-gray-200 shadow-sm text-gray-800 font-semibold ">
           Register
         </button>
