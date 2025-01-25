@@ -8,14 +8,21 @@ import bcryptjs from "bcryptjs";
 export async function POST(req: NextRequest) {  
     try {  
         await connectMongo();  
-        const body: CreateUserDto = await req.json();  
-        if (body.user && body.email && body.password) {
+        const body: CreateUserDto = await req.json(); 
+        const {user, email, password} = body 
+        if (user && email && password) {
             const salt = await bcryptjs.genSalt(10)
-            const hashedPassword = await bcryptjs.hash(body.password, salt)  
+            const hashedPassword = await bcryptjs.hash(password, salt)  
+
+            const userCheck = await User.findOne({email})
             
-            const user = await User.create({
-                user: body.user,
-                email : body.email,
+            if(userCheck){
+                return NextResponse.json({error: "User already exists with same email"}, {status: 400})
+            }
+
+            const newUser = await User.create({
+                user,
+                email,
                 password: hashedPassword});  
             return NextResponse.json(  
                 { status: HttpStatusCode.Created },  
