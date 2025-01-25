@@ -40,7 +40,7 @@ export default function SignUp() {
         <p className="text-sm my-1 text-gray-700">
           Already have an account?
           <Link
-            href="/login"
+            href="/auth/signin"
             className="text-gray-500 hover:text-blue-800 font-semibold"
           >
             {' '}
