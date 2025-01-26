@@ -3,7 +3,7 @@ import React from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import { FaGithub } from 'react-icons/fa';
 
-export default function SignUp() {
+export default function SignIn() {
   return (
     <div className="form-container bg-gray-400">
       <form className="form transition-all duration-300 ease-in mb-2 w-[90%] sm:w-[500px] bg-white shadow-sm px-6 md:px-20 py-10 rounded-md">
