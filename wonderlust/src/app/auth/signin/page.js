@@ -8,8 +8,7 @@ export default function SignIn() {
     <div className="form-container bg-gray-400">
       <form className="form transition-all duration-300 ease-in mb-2 w-[90%] sm:w-[500px] bg-white shadow-sm px-6 md:px-20 py-10 rounded-md">
         <h2 className="md:text-3xl text-2xl text-bold mb-6 text-center font-bold">
-          Welcome to Wanderlust
-        Login
+        Login to Wanderlust
         </h2>
         
         <div className="flex flex-col gap-2 font-bold">
