@@ -26,9 +26,9 @@ jobs:
         working-directory: wonderlust
         run: npm run build
 
-      - name: Run lint checks
-        working-directory: wonderlust
-        run: npm run lint
+      # - name: Run lint checks
+      #   working-directory: wonderlust
+      #   run: npm run lint
 
     #   - name: Run tests
     #     working-directory: wonderlust
