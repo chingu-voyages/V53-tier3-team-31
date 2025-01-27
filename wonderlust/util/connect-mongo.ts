@@ -19,6 +19,7 @@ async function connectMongo() {
     }  
     try {  
         cached.connection = await cached.promise;  
+        console.log("connect to db ")
     } catch (e) {  
         cached.promise = undefined;  
         throw e;  
