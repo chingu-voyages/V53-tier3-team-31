@@ -7,6 +7,8 @@ import { FaGoogle, FaGithub } from "react-icons/fa";
 export default function SignIn() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [flashMessage, setflashMessage] = useState("");
+  const [flashMessageType, setflashMessageType] = useState("");
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -35,14 +37,21 @@ export default function SignIn() {
       });
 
       if (response.ok) {
-        router.push("/");
+        setflashMessage("Logged in successfully");
+        setflashMessageType("success");
+        setTimeout(() => {
+          router.push("/");
+        }, 1500);
       } else {
         const errorData = await response.json();
-        console.log("Error response:", errorData);
-        router.push("/auth/signin");
+        setflashMessage(
+          errorData.message || "Something went wrong. Please try again."
+        );
+        setflashMessageType("error");
       }
     } catch (error) {
-      console.log("Error:", error);
+      setflashMessage("An error occurred. Please try again.");
+      setflashMessageType("error");
     } finally {
       setIsSubmitting(false);
     }
@@ -57,6 +66,18 @@ export default function SignIn() {
         <h2 className="md:text-3xl text-2xl text-bold mb-6 text-center font-bold">
           Login to Wanderlust
         </h2>
+        {flashMessage && (
+          <div
+            className={`flash-message mb-4 p-2 text-center rounded-md 
+            ${
+              flashMessageType === "success"
+                ? "bg-green-200 text-green-700"
+                : "bg-red-200 text-red-700"
+            }`}
+          >
+            {flashMessage}
+          </div>
+        )}
 
         <div className="flex flex-col gap-2 font-bold">
           Email

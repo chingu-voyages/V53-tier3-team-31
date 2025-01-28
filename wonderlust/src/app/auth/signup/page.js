@@ -11,6 +11,8 @@ export default function SignUp() {
     password: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [flashMessage, setFlashMessage] = useState("");
+  const [flashMessageType, setFlashMessageType] = useState("");
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -23,6 +25,8 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setFlashMessage("");
+    setFlashMessageType("");
     setIsSubmitting(true);
 
     try {
@@ -38,15 +42,20 @@ export default function SignUp() {
         },
       });
 
+      const data = await response.json();
       if (response.ok) {
-        router.push("/auth/signin");
+        setFlashMessage("Registration successful!");
+        setFlashMessageType("success");
+        setTimeout(() => {
+          router.push("/auth/signin");
+        }, 2000);
       } else {
-        const errorData = await response.json();
-        console.log("Error response:", errorData);
-        router.push("/auth/signup");
+        setFlashMessage(data.error || "Something went wrong.");
+        setFlashMessageType("error");
       }
     } catch (error) {
-      console.log("Error:", error);
+      setFlashMessage("Something went wrong, please try again.");
+      setFlashMessageType("error");
     } finally {
       setIsSubmitting(false);
     }
@@ -61,6 +70,19 @@ export default function SignUp() {
         <h2 className="md:text-3xl text-2xl text-bold mb-6 text-center font-bold">
           Welcome to Wanderlust
         </h2>
+
+        {flashMessage && (
+          <div
+            className={`flash-message mb-4 p-2 text-center rounded-md 
+            ${
+              flashMessageType === "success"
+                ? "bg-green-200 text-green-700"
+                : "bg-red-200 text-red-700"
+            }`}
+          >
+            {flashMessage}
+          </div>
+        )}
         <div className="flex-col flex gap-2 font-bold">
           Name
           <input
