@@ -39,7 +39,7 @@ export default function SignUp() {
       });
 
       if (response.ok) {
-        router.push("/");
+        router.push("/auth/signin");
       } else {
         const errorData = await response.json();
         console.log("Error response:", errorData);
