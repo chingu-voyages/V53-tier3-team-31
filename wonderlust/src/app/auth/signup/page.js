@@ -1,12 +1,63 @@
-import Link from 'next/link';
-import React from 'react';
-import { FaGoogle } from 'react-icons/fa';
-import { FaGithub } from 'react-icons/fa';
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { FaGoogle, FaGithub } from "react-icons/fa";
 
 export default function SignUp() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        body: JSON.stringify({
+          user: formData.name,
+          email: formData.email,
+          password: formData.password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        router.push("/auth/signin");
+      } else {
+        const errorData = await response.json();
+        console.log("Error response:", errorData);
+        router.push("/auth/signup");
+      }
+    } catch (error) {
+      console.log("Error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="form-container bg-gray-400">
-      <form className="form transition-all duration-300 ease-in mb-2 w-[90%] sm:w-[500px] bg-white shadow-sm px-6 md:px-20 py-10 rounded-md">
+      <form
+        onSubmit={handleSubmit}
+        className="form transition-all duration-300 ease-in mb-2 w-[90%] sm:w-[500px] bg-white shadow-sm px-6 md:px-20 py-10 rounded-md"
+      >
         <h2 className="md:text-3xl text-2xl text-bold mb-6 text-center font-bold">
           Welcome to Wanderlust
         </h2>
@@ -14,6 +65,8 @@ export default function SignUp() {
           Name
           <input
             name="name"
+            value={formData.name}
+            onChange={handleChange}
             className="form-field outline-none border-none font-normal text-gray-700"
             type="text"
             placeholder="Name"
@@ -23,6 +76,8 @@ export default function SignUp() {
           Email
           <input
             name="email"
+            value={formData.email}
+            onChange={handleChange}
             className="form-field outline-none border-none font-normal text-gray-700"
             type="email"
             placeholder="Email"
@@ -32,7 +87,9 @@ export default function SignUp() {
           Password
           <input
             name="password"
-            className="form-field  outline-none border-none font-normal text-gray-700"
+            value={formData.password}
+            onChange={handleChange}
+            className="form-field outline-none border-none font-normal text-gray-700"
             type="password"
             placeholder="Password"
           />
@@ -43,11 +100,15 @@ export default function SignUp() {
             href="/auth/signin"
             className="text-gray-500 hover:text-blue-800 font-semibold"
           >
-            {' '}
+            {" "}
             Login
           </Link>
         </p>
-        <button className="px-2 w-auto py-2 rounded-lg my-1 bg-gray-100 hover:bg-gray-200 shadow-sm text-gray-800 font-semibold ">
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="px-2 w-auto py-2 rounded-lg my-1 bg-gray-100 hover:bg-gray-200 shadow-sm text-gray-800 font-semibold "
+        >
           Register
         </button>
         <button className="px-2 w-auto py-2 rounded-lg my-1  bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold flex items-center justify-center gap-3">
