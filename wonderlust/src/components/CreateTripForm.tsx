@@ -7,7 +7,7 @@ const CreateTripForm = () => {
         <h2 className="md:text-3xl text-2xl text-bold mb-6  font-bold">
           Create a New Trip
         </h2>
-        <div className="flex-col flex gap-2 font-semibold">
+        <div className="flex-col flex gap-2 font-semibold text-gray-600">
           Trip Name
           <input
             name="Trip Name"
@@ -16,7 +16,7 @@ const CreateTripForm = () => {
             placeholder="Name"
           />
         </div>
-        <div className="flex flex-col gap-2 font-semibold">
+        <div className="flex flex-col gap-2 font-semibold text-gray-600">
           Destination
           <input
             name="destination"
@@ -26,7 +26,7 @@ const CreateTripForm = () => {
           />
         </div>
         <div className="flex justify-between flex-col md:flex-row">
-          <div className="flex flex-col gap-2 font-semibold sm:w-[47%]">
+          <div className="flex flex-col gap-2 font-semibold sm:w-[47%] text-gray-600">
             Start Date
             <input
               name="startdate"
@@ -35,7 +35,7 @@ const CreateTripForm = () => {
               placeholder="mm/dd/yyyy"
             />
           </div>
-          <div className="flex flex-col gap-2 font-semibold sm:w-[47%]">
+          <div className="flex flex-col gap-2 font-semibold sm:w-[47%] text-gray-600">
             End Date
             <input
               name="enddate"
@@ -45,7 +45,7 @@ const CreateTripForm = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col gap-2 font-semibold">
+        <div className="flex flex-col gap-2 font-semibold text-gray-600">
           Travelers
           <input
             name="travelers"
@@ -58,13 +58,13 @@ const CreateTripForm = () => {
         <div className=" flex gap-4 ml-auto mt-6">
           <button
             type="submit"
-            className="px-4 w-auto py-2 rounded-lg my-1 bg-gray-100 hover:bg-gray-200 shadow-sm text-gray-800 font-semibold "
+            className="px-4 w-auto py-2 rounded-lg my-1 bg-gray-100 hover:bg-gray-200 shadow-sm text-gray-600 font-semibold "
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="px-4 w-auto py-2 rounded-lg my-1 bg-blue-500 hover:bg-blue-400 shadow-sm text-white font-semibold "
+            className="px-4 w-auto py-2 rounded-lg my-1 bg-blue-600 hover:bg-blue-400 shadow-sm text-white font-semibold "
           >
             Create Trip
           </button>
