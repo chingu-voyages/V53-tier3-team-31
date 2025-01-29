@@ -24,7 +24,6 @@ export default function SignIn() {
     setIsSubmitting(true);
 
     try {
-      console.log("Submitting form with data:", formData);
       const response = await fetch("/api/auth/signin", {
         method: "POST",
         body: JSON.stringify({
@@ -68,7 +67,7 @@ export default function SignIn() {
         </h2>
         {flashMessage && (
           <div
-            className={`flash-message mb-4 p-2 text-center rounded-md 
+            className={`mb-4 p-2 text-center rounded-md 
             ${
               flashMessageType === "success"
                 ? "bg-green-200 text-green-700"

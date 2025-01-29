@@ -73,7 +73,7 @@ export default function SignUp() {
 
         {flashMessage && (
           <div
-            className={`flash-message mb-4 p-2 text-center rounded-md 
+            className={`mb-4 p-2 text-center rounded-md 
             ${
               flashMessageType === "success"
                 ? "bg-green-200 text-green-700"
