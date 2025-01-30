@@ -45,14 +45,25 @@ const CreateTripForm = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col gap-2 font-semibold text-gray-600">
-          Travelers
-          <input
-            name="travelers"
-            className="form-field outline-none border-none font-normal text-gray-700"
-            type="number"
-            placeholder="0"
-          />
+        <div className="flex justify-between flex-col md:flex-row">
+          <div className="flex flex-col gap-2 font-semibold text-gray-600 sm:w-[47%]">
+            Budget
+            <input
+              name="travelers"
+              className="form-field outline-none border-none font-normal text-gray-700"
+              type="text"
+              placeholder="$10000"
+            />
+          </div>
+          <div className="flex flex-col gap-2 font-semibold text-gray-600 sm:w-[47%]">
+            Travelers
+            <input
+              name="travelers"
+              className="form-field outline-none border-none font-normal text-gray-700"
+              type="text"
+              placeholder="0"
+            />
+          </div>
         </div>
 
         <div className=" flex gap-4 ml-auto mt-6">
