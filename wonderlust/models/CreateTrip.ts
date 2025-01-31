@@ -48,6 +48,6 @@ const TripSchema = new Schema({
 }
 )
 
-const CreateTrip = models.CreateTrip || model('Trip', TripSchema);
+const Trip = models.Trip || model('Trip', TripSchema);
 
-export default CreateTrip
+export default Trip
