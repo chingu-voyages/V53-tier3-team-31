@@ -13,18 +13,23 @@ const TripSchema = new Schema({
  tripname: {
   type: String,
   required: [true, 'Username is required'],
-  trim: true,
   minLength: [3, 'tripname must be at least 3 characters long'],
  },
  destination: {
   type: String,
   required: [true, 'destination is required'],
-  trim: true,
+
   minLength: [3, 'destination must be at least 3 characters long'],
  },
- Budget: {
-  type: Number,
+ budget: {
+  type: String,
   min: 3,
+ },
+ 
+ travellers: {
+  type: String,
+  required:true,
+  min: 1,
  },
  startDay: {
   type: Date,
@@ -41,13 +46,10 @@ const TripSchema = new Schema({
       message: 'End day must be at least 1 day after start day',
     }
  },
- Travellers: {
-  type: Number,
-  min: 1,
- },
 }
 )
 
 const Trip = models.Trip || model('Trip', TripSchema);
 
 export default Trip
+
