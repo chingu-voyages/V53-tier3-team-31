@@ -10,7 +10,7 @@ const CreateTripForm = () => {
         <div className="flex-col flex gap-2 font-semibold text-gray-600">
           Trip Name
           <input
-            name="Trip Name"
+            name="tripname"
             className="form-field outline-none border-none font-normal text-gray-700"
             type="text"
             placeholder="Name"
@@ -29,7 +29,7 @@ const CreateTripForm = () => {
           <div className="flex flex-col gap-2 font-semibold sm:w-[47%] text-gray-600">
             Start Date
             <input
-              name="startdate"
+              name="startDay"
               className="form-field outline-none border-none font-normal text-gray-700"
               type="date"
               placeholder="mm/dd/yyyy"
@@ -38,7 +38,7 @@ const CreateTripForm = () => {
           <div className="flex flex-col gap-2 font-semibold sm:w-[47%] text-gray-600">
             End Date
             <input
-              name="enddate"
+              name="endDay"
               className="form-field outline-none border-none font-normal text-gray-700"
               type="date"
               placeholder="mm/dd/yyyy"
@@ -49,7 +49,7 @@ const CreateTripForm = () => {
           <div className="flex flex-col gap-2 font-semibold text-gray-600 sm:w-[47%]">
             Budget
             <input
-              name="travelers"
+              name="budget"
               className="form-field outline-none border-none font-normal text-gray-700"
               type="text"
               placeholder="$10000"
