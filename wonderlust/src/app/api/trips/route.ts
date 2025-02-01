@@ -3,15 +3,7 @@ import Trip from '@/models/CreateTrip'
 import { HttpStatusCode } from "axios";
 import connectMongo from "@/util/connect-mongo";
 
-export async function GET() {  
-    try {  
-        await connectMongo();  
-        const trips = await Trip.find();  
-        return NextResponse.json({ data: trips });  
-    } catch (error) {  
-        return NextResponse.json({ error });  
-    }  
-}
+
 
 export async function POST(req: NextRequest) { 
  
