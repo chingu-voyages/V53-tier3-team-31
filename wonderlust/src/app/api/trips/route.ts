@@ -87,7 +87,7 @@ export async function DELETE(req: NextRequest) {
 
     return NextResponse.json(
       { success: true, message: "Trip deleted successfully"},
-      { status: HttpStatusCode.OK }
+      { status: HttpStatusCode.Ok }
     );
     }
     return NextResponse.json(
@@ -134,7 +134,7 @@ export async function PUT(req: NextRequest) {
     if (checker) {
       return NextResponse.json(
         { success: true, message: "Trip updated successfully"},
-        { status: HttpStatusCode.OK }
+        { status: HttpStatusCode.Ok }
       );
     }
    
