@@ -1,12 +1,18 @@
 import React from 'react';
+import { Dialog, Button } from '@radix-ui/themes';
 
-const CreateTripForm = () => {
+const TripForm = ({buttonValue, title, actionTitle}) => {
   return (
-    <div className="form-container w-[90%] ">
-      <form className="form transition-all duration-300 ease-in mb-2 w-[100%] sm:w-[600px] lg:w-[800px] bg-white shadow-sm px-6 md:px-20 py-10 rounded-md">
+    <Dialog.Root>
+      <Dialog.Trigger>
+		<Button>{buttonValue}</Button>
+	</Dialog.Trigger>
+      <Dialog.Content  align="center">
+      <form className='w-full'>
         <h2 className="md:text-3xl text-2xl text-bold mb-6  font-bold">
-          Create a New Trip
         </h2>
+        <Dialog.Title>{title}</Dialog.Title> 
+        
         <div className="flex-col flex gap-2 font-semibold text-gray-600">
           Trip Name
           <input
@@ -67,22 +73,22 @@ const CreateTripForm = () => {
         </div>
 
         <div className=" flex gap-4 ml-auto mt-6">
-          <button
-            type="submit"
-            className="px-4 w-auto py-2 rounded-lg my-1 bg-gray-100 hover:bg-gray-200 shadow-sm text-gray-600 font-semibold "
-          >
+          <Dialog.Close>
+          <Button variant="soft" color="gray">
             Cancel
-          </button>
-          <button
-            type="submit"
-            className="px-4 w-auto py-2 rounded-lg my-1 bg-blue-600 hover:bg-blue-400 shadow-sm text-white font-semibold "
-          >
-            Create Trip
-          </button>
+          </Button>
+        </Dialog.Close>
+        <Dialog.Close>
+          <Button >
+            {actionTitle}
+            </Button>
+        </Dialog.Close>
         </div>
       </form>
-    </div>
+    
+    </Dialog.Content>
+    </Dialog.Root>
   );
 };
 
-export default CreateTripForm;
+export default TripForm;
