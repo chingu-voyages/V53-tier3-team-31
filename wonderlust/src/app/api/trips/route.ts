@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
 
   const { tripname, budget, travellers,
    startDay, endDay,
-   destination } = body;
+   destination ,userId} = body;
   const parsedStartDay = new Date(startDay);
   const parsedEndDay = new Date(endDay);
   
@@ -31,9 +31,9 @@ export async function POST(req: NextRequest) {
    travellers:travellers,
    destination: destination,
    startDay:parsedStartDay,
-   endDay:parsedEndDay,
+   endDay: parsedEndDay,
+   user:userId
   });
-
 
    await Trip.create(newTrip)
   

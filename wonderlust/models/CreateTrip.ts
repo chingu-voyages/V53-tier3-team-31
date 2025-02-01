@@ -1,4 +1,4 @@
-import { model, models, Schema } from 'mongoose';
+import  { model, models, Schema, Types } from 'mongoose';
 
 interface ITrip extends Document {
   tripName: string;
@@ -7,6 +7,7 @@ interface ITrip extends Document {
   startDay: Date;
   endDay: Date;
   destination: string;
+  user: string
 }
 
 const TripSchema = new Schema({
@@ -45,7 +46,14 @@ const TripSchema = new Schema({
       },
       message: 'End day must be at least 1 day after start day',
     }
- },
+  },
+ user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },
+ 
+}, {
+    timestamps: true,
 }
 )
 
