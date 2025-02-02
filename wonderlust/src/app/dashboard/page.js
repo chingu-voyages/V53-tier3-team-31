@@ -4,6 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Navbar from "../../components/Navbar";
+import TripForm from "@/src/components/TripForm";
+import DeleteConfirm from "@/src/components/DeleteConfirm";
+
 
 export default function Dashboard() {
   const [trips, setTrips] = useState([
@@ -28,21 +31,16 @@ export default function Dashboard() {
   ]);
   const router = useRouter();
 
-  const handleCreateTrip = () => {
-    router.push("/dashboard/new");
-  };
+  
 
   return (
     <div className="bg-gray-100 min-h-screen font-sans">
       <Navbar />
+      
+      
       <main className="max-w-6xl mx-auto p-4">
         <div className="flex justify-start items-center my-6">
-          <button
-            onClick={handleCreateTrip}
-            className="bg-blue-500 text-white px-4 py-2 rounded shadow transition-transform duration-300 ease-in-out hover:bg-blue-600 hover:scale-105"
-          >
-            + Create New Trip
-          </button>
+        <TripForm buttonValue="+ Create New Trip" title="Create New Trip" actionTitle="Create Trip"/>
         </div>
 
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -54,12 +52,16 @@ export default function Dashboard() {
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-bold">{trip.title}</h2>
                 <div className="flex space-x-4">
-                  <button className="text-blue-500 hover:text-blue-700 transition-colors duration-300">
-                    <FaEdit className="text-xl" />
-                  </button>
-                  <button className="text-red-500 hover:text-red-700 transition-colors duration-300">
-                    <FaTrash className="text-xl" />
-                  </button>
+                
+                  <div >
+                  
+                  <TripForm buttonValue={<FaEdit className="text-xl" />} title="Edit Trip" actionTitle="Save Trip"/>
+                  </div>
+                  
+                  <div>
+                  <DeleteConfirm buttonValue={<FaTrash className="text-xl" />}/>
+                    
+                  </div>
                 </div>
               </div>
 
