@@ -117,11 +117,11 @@ export default function SignUp() {
             placeholder="Password"
           />
         </div>
-        <p className="text-sm my-1 text-gray-700">
+        <p className="text-sm my-1">
           Already have an account?
           <Link
             href="/auth/signin"
-            className="text-gray-500 hover:text-blue-800 font-semibold"
+            className="hover:text-blue-800 font-semibold"
           >
             {" "}
             Login
