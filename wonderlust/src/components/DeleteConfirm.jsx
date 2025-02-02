@@ -19,7 +19,16 @@ const DeleteConfirm = ({buttonValue, id}) => {
             "Content-Type": "application/json",
           },
         });
-        setIsOpen(false)
+        if (response.ok) {
+          setIsOpen(false)
+        }
+        else {
+          const errorData = await response.json();
+          setflashMessage(
+            errorData.message || "Something went wrong. Please try again."
+          );
+          setflashMessageType("error");
+        }
       }
       catch (error) {
         setflashMessage("An error occurred. Please try again.");
