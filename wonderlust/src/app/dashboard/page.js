@@ -41,12 +41,6 @@ export default function Dashboard() {
       <main className="max-w-6xl mx-auto p-4">
         <div className="flex justify-start items-center my-6">
         <TripForm buttonValue="+ Create New Trip" title="Create New Trip" actionTitle="Create Trip"/>
-          {/* <button
-           
-            className="bg-blue-500 text-white px-4 py-2 rounded shadow transition-transform duration-300 ease-in-out hover:bg-blue-600 hover:scale-105"
-          >
-            + Create New Trip
-          </button> */}
         </div>
 
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
