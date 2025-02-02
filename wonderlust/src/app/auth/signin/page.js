@@ -101,11 +101,11 @@ export default function SignIn() {
             placeholder="Password"
           />
         </div>
-        <p className="text-sm my-1 text-gray-700">
+        <p className="text-sm my-1">
           Don't have an account?
           <Link
             href="/auth/signup"
-            className="text-gray-500 hover:text-blue-800 font-semibold"
+            className=" hover:text-blue-800 font-semibold"
           >
             {" "}
             Register
