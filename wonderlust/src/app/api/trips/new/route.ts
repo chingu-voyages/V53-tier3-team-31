@@ -4,6 +4,8 @@ import { HttpStatusCode } from "axios";
 import connectMongo from "@/util/connect-mongo";
 import mongoose from "mongoose";
 
+// Get somehow the user objectID here using middleware
+const userId = "6792633eaa08eb6efef02261" 
 
 export async function POST(req: NextRequest) { 
  
@@ -13,7 +15,7 @@ export async function POST(req: NextRequest) {
    
      const { tripname, budget, travellers,
       startDay, endDay,
-      destination ,userId} = body;
+      destination } = body;
      const parsedStartDay = new Date(startDay);
      const parsedEndDay = new Date(endDay);
    
