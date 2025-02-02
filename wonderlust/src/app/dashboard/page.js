@@ -15,18 +15,21 @@ export default function Dashboard() {
       date: "Aug 1 - Aug 15, 2024",
       budget: "$5,000",
       travelers: 3,
+      tripObjId: "679e6e05189dd60ff447e7fd"
     },
     {
       title: "Sample Card 2",
       date: "Nov 10 - Nov 30, 2024",
       budget: "$3,000",
       travelers: 2,
+      tripObjId: "679e6e05189dd60ff447e7fd"
     },
     {
       title: "Sample Card 3",
       date: "Dec 20 - Jan 5, 2025",
       budget: "$10,000",
       travelers: 4,
+      tripObjId: "679e6e05189dd60ff447e7fd"
     },
   ]);
   const router = useRouter();
@@ -59,7 +62,7 @@ export default function Dashboard() {
                   </div>
                   
                   <div>
-                  <DeleteConfirm buttonValue={<FaTrash className="text-xl" />}/>
+                  <DeleteConfirm buttonValue={<FaTrash className="text-xl" />} id={trip.tripObjId}/>
                     
                   </div>
                 </div>
