@@ -57,10 +57,11 @@ export default function SignIn() {
   };
 
   return (
-    <div className="form-container bg-gray-400">
+    <div className="form-container" style={{backgroundColor:"var(--gray-4)"}}>
       <form
         onSubmit={handleSubmit}
-        className="form transition-all duration-300 ease-in mb-2 w-[90%] sm:w-[500px] bg-white shadow-sm px-6 md:px-20 py-10 rounded-md"
+        className="form transition-all duration-300 ease-in mb-2 w-[90%] sm:w-[500px] shadow-sm px-6 md:px-20 py-10 rounded-md"
+        style={{backgroundColor:"var(--gray-1)"}}
       >
         <h2 className="md:text-3xl text-2xl text-bold mb-6 text-center font-bold">
           Login to Wanderlust
@@ -100,11 +101,11 @@ export default function SignIn() {
             placeholder="Password"
           />
         </div>
-        <p className="text-sm my-1 text-gray-700">
+        <p className="text-sm my-1">
           Don't have an account?
           <Link
             href="/auth/signup"
-            className="text-gray-500 hover:text-blue-800 font-semibold"
+            className=" hover:text-blue-800 font-semibold"
           >
             {" "}
             Register

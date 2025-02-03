@@ -34,11 +34,8 @@ export default function Dashboard() {
   
 
   return (
-    <div className="bg-gray-100 min-h-screen font-sans">
-      <Navbar />
-      
-      
-      <main className="max-w-6xl mx-auto p-4">
+    <div className=" min-h-screen font-sans" style={{backgroundColor:"var(--accent-1)"}}>
+      <main className="max-w-6xl mx-auto p-4 " >
         <div className="flex justify-start items-center my-6">
         <TripForm buttonValue="+ Create New Trip" title="Create New Trip" actionTitle="Create Trip"/>
         </div>
@@ -47,7 +44,8 @@ export default function Dashboard() {
           {trips.map((trip, index) => (
             <div
               key={index}
-              className="bg-white p-6 rounded shadow flex flex-col justify-between transition-transform duration-300 ease-in-out hover:shadow-lg hover:scale-105"
+              style={{backgroundColor:"var(--gray-3)"}}
+              className=" p-6 rounded shadow flex flex-col justify-between transition-transform duration-300 ease-in-out hover:shadow-lg hover:scale-105"
             >
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-bold">{trip.title}</h2>

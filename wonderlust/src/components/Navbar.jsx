@@ -2,13 +2,18 @@
 
 import { FaSun } from "react-icons/fa";
 import { useState } from "react";
+import { Button } from "@radix-ui/themes";
 
-export default function NavBar() {
+export default function NavBar({isDark, setIsDark}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const darkTheme = () => {
+    setIsDark(!isDark)
+  }
 
   return (
     <header className="w-full bg-blue-500 py-4 px-8 flex justify-between items-center text-white relative shadow-md transition-shadow duration-300 hover:shadow-lg">
@@ -44,7 +49,10 @@ export default function NavBar() {
       </div>
 
       <nav className="hidden md:flex items-center">
+        <button onClick={darkTheme} >
         <FaSun className="text-white text-lg cursor-pointer mr-6 transition-transform duration-300 hover:scale-125 hover:text-black" />
+        </button>
+        
         <div className="mr-4 cursor-pointer ">John Doe</div>
         <button className="bg-white text-blue-500 px-4 py-2 rounded shadow transition-transform duration-300 hover:bg-gray-100 hover:scale-105">
           Logout

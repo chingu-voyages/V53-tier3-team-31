@@ -62,8 +62,9 @@ export default function SignUp() {
   };
 
   return (
-    <div className="form-container bg-gray-400">
+    <div className="form-container" style={{backgroundColor:"var(--gray-4)"}}>
       <form
+        style={{backgroundColor:"var(--gray-1)"}}
         onSubmit={handleSubmit}
         className="form transition-all duration-300 ease-in mb-2 w-[90%] sm:w-[500px] bg-white shadow-sm px-6 md:px-20 py-10 rounded-md"
       >
@@ -83,7 +84,7 @@ export default function SignUp() {
             {flashMessage}
           </div>
         )}
-        <div className="flex-col flex gap-2 font-bold">
+        <div className="flex flex-col gap-2 font-bold">
           Name
           <input
             name="name"
@@ -116,11 +117,11 @@ export default function SignUp() {
             placeholder="Password"
           />
         </div>
-        <p className="text-sm my-1 text-gray-700">
+        <p className="text-sm my-1">
           Already have an account?
           <Link
             href="/auth/signin"
-            className="text-gray-500 hover:text-blue-800 font-semibold"
+            className="hover:text-blue-800 font-semibold"
           >
             {" "}
             Login
