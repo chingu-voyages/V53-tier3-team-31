@@ -1,0 +1,35 @@
+name: Build Check for /wonderlust
+
+on:
+  pull_request:
+    paths:
+      - 'wonderlust/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' 
+
+      - name: Install dependencies
+        working-directory: wonderlust
+        run: npm install
+
+      - name: Run Next.js build
+        working-directory: wonderlust
+        run: npm run build
+
+      # - name: Run lint checks
+      #   working-directory: wonderlust
+      #   run: npm run lint
+
+    #   - name: Run tests
+    #     working-directory: wonderlust
+    #     run: npm test
