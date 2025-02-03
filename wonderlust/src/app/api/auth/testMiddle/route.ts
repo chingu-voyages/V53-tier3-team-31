@@ -2,8 +2,14 @@ import { NextResponse } from 'next/server';
 import { authenticateJWT } from '../../../../../util/middleware';
 import User from '../../../../../models/User';
 
+interface AuthResult {
+    success: boolean;
+    data?: any;
+    statusCode?: number;
+}
+
 export async function GET(req) {
-    const authResult = await new Promise((resolve) => {
+    const authResult: AuthResult = await new Promise((resolve) => {
         authenticateJWT(req, {
             json: (data) => resolve({ success: true, data }),
             status: (statusCode) => resolve({ success: false, statusCode }),
@@ -12,7 +18,7 @@ export async function GET(req) {
         });
     });
 
-    if (!authResult.success) {
+    if (!authResult?.success) {
         return NextResponse.json({ message: 'Unauthorized' }, { status: authResult.statusCode || 401 });
     }
 
