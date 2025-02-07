@@ -101,10 +101,7 @@ export default function Dashboard() {
                   Planning
                 </a>
 
-                <a
-                  onClick={() => router.push(`/dashboard/${trip.tripObjId}`)}
-                  className="text-blue-600 font-medium hover:underline hover:text-blue-700 transition-colors duration-300 cursor-pointer"
-                >
+                <a className="text-blue-600 font-medium hover:underline hover:text-blue-700 transition-colors duration-300 cursor-pointer">
                   View Details
                 </a>
               </div>
