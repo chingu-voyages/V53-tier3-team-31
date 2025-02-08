@@ -4,8 +4,12 @@ import User from "../../../../../models/User";
 import { CreateUserDto } from "../../../../../dto/create-user.dto";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
+import jwt from 'jsonwebtoken'
+
+
 
 export async function POST(req: NextRequest) {
+  const JWT_SECRET = process.env.JWT_SECRET;
   try {
     await connectMongo();
     const body: CreateUserDto = await req.json();
@@ -14,15 +18,17 @@ export async function POST(req: NextRequest) {
 
     if (email && password) {
       const userCheck = await User.findOne({ email });
-
+console.log(userCheck)
       if (userCheck) {
         const passwordMatches = await bcryptjs.compare(
           password,
           userCheck.password
         );
+        
         if (passwordMatches) {
+          const token = jwt.sign({ username: userCheck.user,email:userCheck.email,id:userCheck._id }, JWT_SECRET, { expiresIn: '1d' })
           return NextResponse.json(
-            { message: "Logged in successfully" },
+            { message: "Logged in successfully",token },
             { status: 200 }
           );
         }
@@ -37,7 +43,6 @@ export async function POST(req: NextRequest) {
       { status: HttpStatusCode.BadRequest }
     );
   } catch (error) {
-    console.error("Error during signin:", error);
     return NextResponse.json(
       { message: error.message },
       { status: HttpStatusCode.InternalServerError }

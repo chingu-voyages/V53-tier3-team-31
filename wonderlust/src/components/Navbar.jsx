@@ -1,11 +1,17 @@
-"use client";
+'use client';
 
-import { FaSun } from "react-icons/fa";
-import { useState } from "react";
-import { Button } from "@radix-ui/themes";
+import { FaSun } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
+import { CgProfile } from 'react-icons/cg';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function NavBar({ isDark, setIsDark }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const pathname = usePathname();
+  const router = useRouter();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -14,6 +20,17 @@ export default function NavBar({ isDark, setIsDark }) {
   const darkTheme = () => {
     setIsDark(!isDark);
   };
+  const handleLogout = () => {
+    localStorage.removeItem('wonderlust');
+    router.push('/auth/signin');
+  };
+  useEffect(() => {
+    const token = localStorage.getItem('wonderlust');
+    if (token) {
+      const decodetoken = jwtDecode(token);
+      setUser(decodetoken);
+    }
+  }, [pathname]);
 
   return (
     <header className="w-full bg-blue-500 py-4 px-8 flex justify-between items-center text-white relative shadow-md transition-shadow duration-300 hover:shadow-lg">
@@ -34,10 +51,15 @@ export default function NavBar({ isDark, setIsDark }) {
         {/* Dropdown Menu for Smaller Screens */}
         {isMenuOpen && (
           <div className="absolute right-8 top-16 bg-white text-black w-48 rounded-lg shadow-lg border border-gray-200 transition-opacity duration-300 z-10">
-            <div className="p-4 border-b border-gray-300 text-center font-semibold hover:bg-gray-100">
-              John Doe
-            </div>
-            <button className="w-full border-b border-gray-300 p-4 text-left hover:bg-gray-100 transition-colors duration-300">
+            {user && (
+              <div className="p-4 border-b border-gray-300 text-center font-semibold hover:bg-gray-100">
+                {user && user?.username}
+              </div>
+            )}
+            <button
+              className="w-full border-b border-gray-300 p-4 text-left hover:bg-gray-100 transition-colors duration-300"
+              onClick={() => handleLogout()}
+            >
               Logout
             </button>
             <div className="flex items-center justify-start p-4 hover:bg-gray-100 transition-colors duration-300">
@@ -54,11 +76,31 @@ export default function NavBar({ isDark, setIsDark }) {
         <button onClick={darkTheme}>
           <FaSun className="text-white text-lg cursor-pointer mr-6 transition-transform duration-300 hover:scale-125 hover:text-black" />
         </button>
+        {user && (
+          <div className="mr-4 cursor-pointer capitalize flex items-center gap-0.5 ">
+            <CgProfile /> {user?.username}
+          </div>
+        )}
 
-        <div className="mr-4 cursor-pointer ">John Doe</div>
-        <button className="bg-white text-blue-500 px-4 py-2 rounded shadow transition-transform duration-300 hover:bg-gray-100 hover:scale-105">
-          Logout
-        </button>
+        {pathname === '/auth/signin' ||
+        pathname === '/auth/signup' ? null : user ? (
+          <button
+            className="bg-white text-blue-500 px-4 py-2 rounded shadow transition-transform duration-300 hover:bg-gray-100 hover:scale-105"
+            onClick={() => handleLogout()}
+          >
+            Logout
+          </button>
+        ) : (
+          <button className="bg-white text-blue-500 px-4 py-2 rounded shadow transition-transform duration-300 hover:bg-gray-100 hover:scale-105">
+            <Link
+              href="/auth/signin"
+              className="hover:text-blue-800 font-semibold"
+            >
+              {' '}
+              Login
+            </Link>
+          </button>
+        )}
       </nav>
     </header>
   );
