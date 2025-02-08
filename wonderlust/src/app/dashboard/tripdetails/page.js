@@ -1,11 +1,21 @@
 "use client";
-import { useState, useEffect } from "react";
+import { redirect } from "next/dist/server/api-utils";
+import { useState, useEffect, useLayoutEffect } from "react";
 
 export default function TripDetail() {
   const [trip, setTrip] = useState(null);
   const [locations, setLocations] = useState([]);
   const [newLocation, setNewLocation] = useState("");
   const [showInput, setShowInput] = useState(false);
+
+  useLayoutEffect(() => {
+    const token = sessionStorage.getItem("Token") &&
+    sessionStorage.getItem("Token") !== "" ? sessionStorage.getItem("Token") : undefined ;
+    if(token == undefined){
+      window.alert("You are not Authorized")
+      redirect("/auth/signin")
+    }
+  }, [])
 
   useEffect(() => {
     const trips = [

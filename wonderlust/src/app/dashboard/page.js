@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useLayoutEffect, useState } from "react";
+import { redirect, useRouter } from "next/navigation";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Navbar from "../../components/Navbar";
 import TripForm from "@/src/components/TripForm";
@@ -40,6 +40,14 @@ export default function Dashboard() {
       tripObjId: "679e6ec4189dd60ff447e804",
     },
   ]);
+  useLayoutEffect(() => {
+    const token = sessionStorage.getItem("Token") &&
+    sessionStorage.getItem("Token") !== "" ? sessionStorage.getItem("Token") : undefined ;
+    if(token == undefined){
+      window.alert("You are not Authorized")
+      redirect("/auth/signin")
+    }
+  }, [])
   const router = useRouter();
 
   return (
