@@ -1,9 +1,70 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Dialog, Button } from '@radix-ui/themes';
+import FlashMessages from "./FlashMessages"
 
-const TripForm = ({buttonValue, title, actionTitle}) => {
-  return (
-    <Dialog.Root>
+const TripForm = ({buttonValue, title, actionTitle, action, id = '', tripInfo = ""}) => {
+  const [formData, setFormData] = useState({ tripname: "", destination: "", startDay: "", endDay: "", budget: "", travellers: "" });
+  const [isOpen, setIsOpen] = useState(false);
+  const [flashMessage, setflashMessage] = useState("");
+  const [flashMessageType, setflashMessageType] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+ 
+  if (action === "edit") {
+    useEffect(() => {
+      setFormData({
+        ...tripInfo,
+        startDay: tripInfo.startDay.split("T")[0],
+        endDay: tripInfo.endDay.split("T")[0]
+
+    })
+    }, [])
+   
+  }
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+        let method = ''
+        if (action === "new") method = "POST"
+        if (action === "edit") method ="PUT"
+
+        const response = await fetch(`/api/trips/${action}`, {
+        method: method,
+        body: JSON.stringify({
+          tripId : id,
+          ...formData 
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        setIsOpen(false)
+      }
+      else {
+        const errorData = await response.json();
+        setflashMessage(
+          errorData.message || "Something went wrong. Please try again."
+        );
+        setflashMessageType("error");
+      }
+    }
+    catch (error) {
+      setflashMessage("An error occurred. Please try again.");
+      setflashMessageType("error");
+    }
+  }
+   return (
+    <Dialog.Root open={isOpen} onOpenChange={(isOpen) => setIsOpen(isOpen)}>
       <Dialog.Trigger>
 		<Button>{buttonValue}</Button>
 	</Dialog.Trigger>
@@ -12,11 +73,13 @@ const TripForm = ({buttonValue, title, actionTitle}) => {
         <h2 className="md:text-3xl text-2xl text-bold mb-6  font-bold">
         </h2>
         <Dialog.Title>{title}</Dialog.Title> 
-        
+        <FlashMessages flashMessage={flashMessage} flashMessageType={flashMessageType}/>
         <div className="flex-col flex gap-2 font-semibold text-gray-600">
           Trip Name
           <input
             name="tripname"
+            value={formData.tripname}
+            onChange={handleChange}
             className="form-field outline-none border-none font-normal text-gray-700"
             type="text"
             placeholder="Name"
@@ -26,8 +89,10 @@ const TripForm = ({buttonValue, title, actionTitle}) => {
           Destination
           <input
             name="destination"
+            value={formData.destination}
+            onChange={handleChange}
             className="form-field outline-none border-none font-normal text-gray-700"
-            type="email"
+            type="text"
             placeholder="Enter your destination"
           />
         </div>
@@ -36,6 +101,8 @@ const TripForm = ({buttonValue, title, actionTitle}) => {
             Start Date
             <input
               name="startDay"
+              value={formData.startDay}
+              onChange={handleChange}
               className="form-field outline-none border-none font-normal text-gray-700"
               type="date"
               placeholder="mm/dd/yyyy"
@@ -45,6 +112,8 @@ const TripForm = ({buttonValue, title, actionTitle}) => {
             End Date
             <input
               name="endDay"
+              value={formData.endDay}
+              onChange={handleChange}
               className="form-field outline-none border-none font-normal text-gray-700"
               type="date"
               placeholder="mm/dd/yyyy"
@@ -56,15 +125,19 @@ const TripForm = ({buttonValue, title, actionTitle}) => {
             Budget
             <input
               name="budget"
+              value={formData.budget}
+              onChange={handleChange}
               className="form-field outline-none border-none font-normal text-gray-700"
               type="text"
               placeholder="$10000"
             />
           </div>
           <div className="flex flex-col gap-2 font-semibold text-gray-600 sm:w-[47%]">
-            Travelers
+            Travellers
             <input
-              name="travelers"
+              name="travellers"
+              value={formData.travellers}
+              onChange={handleChange}
               className="form-field outline-none border-none font-normal text-gray-700"
               type="text"
               placeholder="0"
@@ -78,11 +151,11 @@ const TripForm = ({buttonValue, title, actionTitle}) => {
             Cancel
           </Button>
         </Dialog.Close>
-        <Dialog.Close>
-          <Button >
+        
+          <Button onClick={handleSubmit}>
             {actionTitle}
             </Button>
-        </Dialog.Close>
+        
         </div>
       </form>
     

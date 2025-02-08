@@ -3,6 +3,7 @@ import Trip from '@/models/CreateTrip'
 import { HttpStatusCode } from "axios";
 import connectMongo from "@/util/connect-mongo";
 import mongoose from "mongoose";
+const userId = "6792633eaa08eb6efef02261"
 
 export async function PUT(req: NextRequest) {
     try {
@@ -11,7 +12,7 @@ export async function PUT(req: NextRequest) {
     
       const { tripId ,tripname, budget, travellers,
        startDay, endDay,
-       destination ,userId} = body;
+       destination} = body;
     
       if (!tripname || !budget || !travellers || !startDay || !endDay || !destination || !userId) {
         return NextResponse.json(
