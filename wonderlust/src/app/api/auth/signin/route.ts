@@ -4,6 +4,8 @@ import User from "../../../../../models/User";
 import { CreateUserDto } from "../../../../../dto/create-user.dto";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
+import jwt from 'jsonwebtoken';
+
 
 export async function POST(req: NextRequest) {
   try {
@@ -21,8 +23,13 @@ export async function POST(req: NextRequest) {
           userCheck.password
         );
         if (passwordMatches) {
+          const token = jwt.sign(
+            { id: userCheck._id, email: userCheck.email },
+            process.env.JWT_SECRET,
+            { expiresIn: "1d" } 
+          );
           return NextResponse.json(
-            { message: "Logged in successfully" },
+            { message: "Logged in successfully",token },
             { status: 200 }
           );
         }

@@ -3,6 +3,7 @@
 import { FaSun } from "react-icons/fa";
 import { useState } from "react";
 import { Button } from "@radix-ui/themes";
+import { redirect} from "next/navigation";
 
 export default function NavBar({ isDark, setIsDark }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,7 +38,12 @@ export default function NavBar({ isDark, setIsDark }) {
             <div className="p-4 border-b border-gray-300 text-center font-semibold hover:bg-gray-100">
               John Doe
             </div>
-            <button className="w-full border-b border-gray-300 p-4 text-left hover:bg-gray-100 transition-colors duration-300">
+            <button 
+            onClick={() => {
+              sessionStorage.removeItem("Token")
+              redirect("/auth/signin")
+            }}
+            className="w-full border-b border-gray-300 p-4 text-left hover:bg-gray-100 transition-colors duration-300">
               Logout
             </button>
             <div className="flex items-center justify-start p-4 hover:bg-gray-100 transition-colors duration-300">
@@ -56,7 +62,12 @@ export default function NavBar({ isDark, setIsDark }) {
         </button>
 
         <div className="mr-4 cursor-pointer ">John Doe</div>
-        <button className="bg-white text-blue-500 px-4 py-2 rounded shadow transition-transform duration-300 hover:bg-gray-100 hover:scale-105">
+        <button 
+         onClick={() => {
+          sessionStorage.removeItem("Token")
+          redirect("/auth/signin")
+        }}
+        className="bg-white text-blue-500 px-4 py-2 rounded shadow transition-transform duration-300 hover:bg-gray-100 hover:scale-105">
           Logout
         </button>
       </nav>

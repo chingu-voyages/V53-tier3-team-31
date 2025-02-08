@@ -1,7 +1,9 @@
 "use client"
-import React, { useState } from "react"
+import React, { useLayoutEffect, useState } from "react"
 import { Theme } from "@radix-ui/themes"
 import NavBar from "./Navbar"
+import { redirect} from "next/navigation";
+
 
 export function ThemeProvider({children}) {
   const [isDark, setIsDark] = useState(false)

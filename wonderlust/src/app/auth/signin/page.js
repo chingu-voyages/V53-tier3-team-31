@@ -36,6 +36,9 @@ export default function SignIn() {
       });
 
       if (response.ok) {
+        const responseData = await response.json();
+        let token = responseData?.token
+        sessionStorage.setItem("Token",token)
         setflashMessage("Logged in successfully");
         setflashMessageType("success");
         setTimeout(() => {
