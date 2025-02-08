@@ -28,10 +28,11 @@ export default function NavBar({ isDark, setIsDark }) {
     const token = localStorage.getItem('wonderlust');
     if (token) {
       const decodetoken = jwtDecode(token);
+      console.log(decodetoken);
       setUser(decodetoken);
     }
   }, [pathname]);
-
+  console.log(pathname);
   return (
     <header className="w-full bg-blue-500 py-4 px-8 flex justify-between items-center text-white relative shadow-md transition-shadow duration-300 hover:shadow-lg">
       {/* Navbar Title */}
@@ -76,7 +77,7 @@ export default function NavBar({ isDark, setIsDark }) {
         <button onClick={darkTheme}>
           <FaSun className="text-white text-lg cursor-pointer mr-6 transition-transform duration-300 hover:scale-125 hover:text-black" />
         </button>
-        {user && (
+        {user && pathname !== '/auth/signin' && (
           <div className="mr-4 cursor-pointer capitalize flex items-center gap-0.5 ">
             <CgProfile /> {user?.username}
           </div>
