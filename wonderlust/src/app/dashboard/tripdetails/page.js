@@ -50,8 +50,8 @@ export default function TripDetail() {
 
   return (
     <div>
-    
-      <div className="flex items-center justify-between p-6 bg-white shadow-md  h-[35vh] w-2/3">
+    <div className={`w-full md:w-2/3 md:block ${sidebarOpen ? "hidden" : "block"}`}>
+      <div className="flex items-center justify-between p-6 bg-white shadow-md  h-[35vh] ">
         {/* Image Block */}
         <div className="flex-1 h-[80%] bg-gray-200 rounded-lg flex ">
           <img
@@ -136,6 +136,10 @@ export default function TripDetail() {
         Open Sidebar
       </button>
 
+      <div className="p-6 bg-white shadow-md ">
+          <Timeline  events={events}/>
+        </div>
+    </div>
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)}>
         <h2 className="text-xl font-bold">Search Bar</h2>
         <p>Results</p>
@@ -144,49 +148,7 @@ export default function TripDetail() {
 
     
        
-        <div className="p-6 bg-white shadow-md  w-2/3">
-          <Timeline  events={events}/>
-        </div>
-
-
-        {/* <Accordion.Root
-        className="flex flex-col  justify-between p-6 bg-white shadow-md  h-[35vh] w-1/3"
-		type="single"
-		defaultValue="item-1"
-		collapsible
-	>
-		<Accordion.Item  value="item-1" className="border-solid border-black">
-			<Accordion.Trigger>Transportation Method</Accordion.Trigger>
-			<Accordion.Content>
-				Yes. It adheres to the WAI-ARIA design pattern.
-			</Accordion.Content>
-		</Accordion.Item>
-
-    <Accordion.Item value="item-2" className="border-solid border-black">
-			<Accordion.Trigger>Hotel</Accordion.Trigger>
-			<Accordion.Content>
-				Yes. It adheres to the WAI-ARIA design pattern.
-			</Accordion.Content>
-		</Accordion.Item>
-
-    <Accordion.Item value="item-3" className="border-solid border-black">
-			<Accordion.Trigger>Places to Visit</Accordion.Trigger>
-			<Accordion.Content>
-				Yes. It adheres to the WAI-ARIA design pattern.
-			</Accordion.Content>
-		</Accordion.Item>
-
-		
-
-	</Accordion.Root> */}
-
-
-
-
-
-
-
-
+        
    
     </div>
     
