@@ -150,13 +150,13 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className="max-w-screen-xl 2xl:max-w-screen-3xl px-8 md:px-12 mx-auto py-12 lg:py-24 space-y-24 h-svh flex flex-col justify-center">
+        <div className="max-w-screen-xl 2xl:max-w-screen-3xl px-8 md:px-12 mx-auto py-12 lg:py-24 space-y-24 sm:h-svh flex flex-col justify-center">
           <div className="flex flex-col sm:flex-row mx-auto">
             <a>
               {" "}
               <img
                 src="https://images.unsplash.com/photo-1737332147522-b1aca590c957?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                className="rounded-xl  rotate-6 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
+                className="rounded-xl  rotate-6 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover sm:hover:scale-150 transform origin-bottom"
                 alt="#_"
               />{" "}
             </a>
@@ -164,7 +164,7 @@ export default function Home() {
               {" "}
               <img
                 src="https://images.unsplash.com/photo-1719124724315-5cc04a47b072?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                className="rounded-xl  -rotate-12 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
+                className="rounded-xl  -rotate-12 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover sm:hover:scale-150 transform origin-bottom"
                 alt="#_"
               />{" "}
             </a>
@@ -172,7 +172,7 @@ export default function Home() {
               {" "}
               <img
                 src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=1421&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                className="rounded-xl  rotate-6 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
+                className="rounded-xl  rotate-6 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover sm:hover:scale-150 transform origin-bottom"
                 alt="#_"
               />{" "}
             </a>
@@ -180,7 +180,7 @@ export default function Home() {
               {" "}
               <img
                 src="https://images.unsplash.com/photo-1709464973748-15ca6633f436?q=80&w=1462&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                className="rounded-xl  -rotate-12 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover hover:scale-150 transform origin-bottom"
+                className="rounded-xl  -rotate-12 hover:rotate-0 duration-500 hover:-translate-y-12 h-full w-full object-cover sm:hover:scale-150 transform origin-bottom"
                 alt="#_"
               />{" "}
             </a>
