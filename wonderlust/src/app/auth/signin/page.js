@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
+import { signIn } from 'next-auth/react';
 
 export default function SignIn() {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -55,6 +56,13 @@ export default function SignIn() {
       setflashMessageType('error');
     } finally {
       setIsSubmitting(false);
+    }
+  };
+  const handleGoogleLogin = async () => {
+    try {
+      signIn('google', { callbackUrl: '/' });
+    } catch (error) {
+      console.error('Google login failed: ', error);
     }
   };
 
@@ -124,11 +132,11 @@ export default function SignIn() {
           Login
         </button>
 
-        <button className="px-2 w-auto py-2 rounded-lg my-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold flex items-center justify-center gap-3">
+        <button
+          className="px-2 w-auto py-2 rounded-lg my-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold  flex items-center justify-center gap-3"
+          onClick={() => handleGoogleLogin()}
+        >
           <FaGoogle /> Continue with Google
-        </button>
-        <button className="px-2 w-auto py-2 rounded-lg my-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold flex items-center justify-center gap-3">
-          <FaGithub /> Continue with Github
         </button>
       </form>
     </div>

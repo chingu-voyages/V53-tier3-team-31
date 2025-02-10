@@ -6,12 +6,14 @@ import { jwtDecode } from 'jwt-decode';
 import { CgProfile } from 'react-icons/cg';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { signOut, useSession } from 'next-auth/react';
 
 export default function NavBar({ isDark, setIsDark }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
   const pathname = usePathname();
   const router = useRouter();
+  const { data: session } = useSession();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -20,19 +22,26 @@ export default function NavBar({ isDark, setIsDark }) {
   const darkTheme = () => {
     setIsDark(!isDark);
   };
-  const handleLogout = () => {
-    localStorage.removeItem('wonderlust');
-    router.push('/auth/signin');
+  const handleLogout = async () => {
+    if (session) {
+      await signOut({ redirect: false });
+      localStorage.removeItem('wonderlust');
+    } else {
+      localStorage.removeItem('wonderlust');
+    }
+    router.replace('/auth/signin');
   };
+
   useEffect(() => {
     const token = localStorage.getItem('wonderlust');
     if (token) {
       const decodetoken = jwtDecode(token);
-      console.log(decodetoken);
       setUser(decodetoken);
+    } else {
+      setUser(session?.user);
     }
-  }, [pathname]);
-  console.log(pathname);
+  }, [pathname, session]);
+
   return (
     <header className="w-full bg-blue-500 py-4 px-8 flex justify-between items-center text-white relative shadow-md transition-shadow duration-300 hover:shadow-lg">
       {/* Navbar Title */}
@@ -54,7 +63,7 @@ export default function NavBar({ isDark, setIsDark }) {
           <div className="absolute right-8 top-16 bg-white text-black w-48 rounded-lg shadow-lg border border-gray-200 transition-opacity duration-300 z-10">
             {user && (
               <div className="p-4 border-b border-gray-300 text-center font-semibold hover:bg-gray-100">
-                {user && user?.username}
+                {(session && user.name) || (user && user?.username)}
               </div>
             )}
             <button
