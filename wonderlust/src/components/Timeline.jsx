@@ -17,10 +17,10 @@ export default function Timeline({ events }) {
             <div className="w-full">
               <Accordion.Root type="single" collapsible>
                 <Accordion.Item value={`item-${index}`} className="border rounded-lg overflow-hidden">
-                  <Accordion.Trigger className="w-full bg-gray-800 text-white p-4 text-left font-bold  hover:bg-gray-700 transition">
+                  <Accordion.Trigger className="w-full   p-4 text-left font-bold  hover:bg-[var(--blue  -7)] transition">
                     {event.title}
                   </Accordion.Trigger>
-                  <Accordion.Content className="p-4 bg-gray-900 text-gray-300">
+                  <Accordion.Content className="p-4  bg-[var(--blue-7)] text-[var(--gray-3)]">
                     <p className="text-sm">{event.date}</p>
                     <p className="mt-2">{event.description}</p>
                   </Accordion.Content>

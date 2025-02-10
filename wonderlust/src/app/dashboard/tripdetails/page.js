@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Accordion } from "radix-ui";
+import { Button } from "@radix-ui/themes";
 import Sidebar from "@/src/components/Sidebar"
 import Timeline from "@/src/components/Timeline"
 
@@ -51,9 +51,9 @@ export default function TripDetail() {
   return (
     <div>
     <div className={`w-full md:w-2/3 md:block ${sidebarOpen ? "hidden" : "block"}`}>
-      <div className="flex items-center justify-between p-6 bg-white shadow-md  h-[35vh] ">
+      <div className="flex items-center justify-between p-6 shadow-md  h-[35vh] ">
         {/* Image Block */}
-        <div className="flex-1 h-[80%] bg-gray-200 rounded-lg flex ">
+        <div className="flex-1 h-[80%] bg-[var(--gray-2)] rounded-lg flex ">
           <img
             src="https://via.placeholder.com/150/000000/FFFFFF/?text=Photo"
             alt="Trip Image"
@@ -129,14 +129,14 @@ export default function TripDetail() {
           </div>
         )}
       </div> */}
-      <button
+      <Button
         className="p-2 bg-blue-600 text-white rounded-md"
         onClick={() => setSidebarOpen(true)}
       >
         Open Sidebar
-      </button>
+      </Button>
 
-      <div className="p-6 bg-white shadow-md ">
+      <div className="p-6 shadow-md ">
           <Timeline  events={events}/>
         </div>
     </div>
