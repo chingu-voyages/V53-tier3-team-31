@@ -30,10 +30,10 @@ const handler = NextAuth( {
   return token;
 },
   async session({ session,token }){
-   session.user.id = token.id;
+   session.user.id = token.id as string;
    session.user.email = token.email;
-   session.user.accessToken = token.accessToken
-   session.user.loginMethod = token.loginMethod;
+   session.user.accessToken = token.accessToken as string
+   session.user.loginMethod = token.loginMethod as string;
    
       return session;
   },
@@ -43,12 +43,12 @@ const handler = NextAuth( {
     const userExists = await User.findOne({
      email: profile.email,
     });
+    
     if (!userExists) {
-     
      await User.create({
       email: profile.email,
       user: profile.name.replace(' ', '').toLowerCase(),
-      image:profile.picture
+      image:profile.picture 
      })
     }
     return true
