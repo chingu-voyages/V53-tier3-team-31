@@ -27,7 +27,6 @@ const handler = NextAuth( {
       expiresIn: "7d",
     });
    }
-   console.log(2,token)
   return token;
 },
   async session({ session,token }){
@@ -35,7 +34,7 @@ const handler = NextAuth( {
    session.user.email = token.email;
    session.user.accessToken = token.accessToken
    session.user.loginMethod = token.loginMethod;
-   console.log(1,session)
+   
       return session;
   },
   async signIn({ account, profile }) {
@@ -45,7 +44,7 @@ const handler = NextAuth( {
      email: profile.email,
     });
     if (!userExists) {
-     console.log('jeello',userExists,profile)
+     
      await User.create({
       email: profile.email,
       user: profile.name.replace(' ', '').toLowerCase(),
