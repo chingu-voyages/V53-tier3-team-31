@@ -34,7 +34,7 @@ export default function NavBar({ isDark, setIsDark }) {
   }, [pathname]);
   console.log(pathname);
   return (
-    <header className="w-full bg-blue-500 py-4 px-8 flex justify-between items-center text-white relative shadow-md transition-shadow duration-300 hover:shadow-lg">
+    <div className="w-full sticky top-0 bg-blue-500 py-4 px-8 flex justify-between items-center text-white relative shadow-md transition-shadow duration-300 hover:shadow-lg">
       {/* Navbar Title */}
       <h1 className="text-2xl font-bold cursor-pointer hover:underline hover:text-blue-300 transition-colors duration-300">
         Wanderlust
@@ -103,6 +103,6 @@ export default function NavBar({ isDark, setIsDark }) {
           </button>
         )}
       </nav>
-    </header>
+    </div>
   );
 }
