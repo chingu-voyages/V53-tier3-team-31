@@ -1,14 +1,14 @@
-"use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { FaGoogle, FaGithub } from "react-icons/fa";
+'use client';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { FaGoogle, FaGithub } from 'react-icons/fa';
 
 export default function SignIn() {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ email: '', password: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [flashMessage, setflashMessage] = useState("");
-  const [flashMessageType, setflashMessageType] = useState("");
+  const [flashMessage, setflashMessage] = useState('');
+  const [flashMessageType, setflashMessageType] = useState('');
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -24,44 +24,49 @@ export default function SignIn() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/auth/signin", {
-        method: "POST",
+      const response = await fetch('/api/auth/signin', {
+        method: 'POST',
         body: JSON.stringify({
           email: formData.email,
           password: formData.password,
         }),
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
-
       if (response.ok) {
-        setflashMessage("Logged in successfully");
-        setflashMessageType("success");
+        const data = await response.json();
+        localStorage.setItem('wonderlust', data.token);
+
+        setflashMessage('Logged in successfully');
+        setflashMessageType('success');
         setTimeout(() => {
-          router.push("/");
+          router.push('/');
         }, 1500);
       } else {
         const errorData = await response.json();
         setflashMessage(
-          errorData.message || "Something went wrong. Please try again."
+          errorData.message || 'Something went wrong. Please try again.'
         );
-        setflashMessageType("error");
+        setflashMessageType('error');
       }
     } catch (error) {
-      setflashMessage("An error occurred. Please try again.");
-      setflashMessageType("error");
+      setflashMessage('An error occurred. Please try again.');
+      setflashMessageType('error');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="form-container" style={{backgroundColor:"var(--gray-4)"}}>
+    <div
+      className="form-container"
+      style={{ backgroundColor: 'var(--gray-4)' }}
+    >
       <form
         onSubmit={handleSubmit}
         className="form transition-all duration-300 ease-in mb-2 w-[90%] sm:w-[500px] shadow-sm px-6 md:px-20 py-10 rounded-md"
-        style={{backgroundColor:"var(--gray-1)"}}
+        style={{ backgroundColor: 'var(--gray-1)' }}
       >
         <h2 className="md:text-3xl text-2xl text-bold mb-6 text-center font-bold">
           Login to Wanderlust
@@ -70,9 +75,9 @@ export default function SignIn() {
           <div
             className={`mb-4 p-2 text-center rounded-md 
             ${
-              flashMessageType === "success"
-                ? "bg-green-200 text-green-700"
-                : "bg-red-200 text-red-700"
+              flashMessageType === 'success'
+                ? 'bg-green-200 text-green-700'
+                : 'bg-red-200 text-red-700'
             }`}
           >
             {flashMessage}
@@ -107,7 +112,7 @@ export default function SignIn() {
             href="/auth/signup"
             className=" hover:text-blue-800 font-semibold"
           >
-            {" "}
+            {' '}
             Register
           </Link>
         </p>
