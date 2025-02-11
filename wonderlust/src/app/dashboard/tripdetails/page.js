@@ -43,7 +43,7 @@ export default function TripDetail() {
       <div className="flex items-center justify-between p-6 shadow-md  h-[35vh] ">
         {/* Image Block */}
         <div className="flex-1 h-[80%] bg-[var(--gray-2)] rounded-lg flex ">
-          <Image
+          <image
             src="https://via.placeholder.com/150/000000/FFFFFF/?text=Photo"
             alt="Trip Image"
             className="object-cover w-full h-full rounded-lg"
@@ -51,8 +51,11 @@ export default function TripDetail() {
         </div>
 
         {/* Trip Info Block */}
+        <div className="flex flex-col flex-1">
+        <h2 className="text-[20px] font-bold flex">{trip.tripname}</h2>
+        
         <div className="flex flex-col flex-1   px-8">
-          <h2 className="text-[20px] font-bold">{trip.tripname}</h2>
+          
           <p className="text-[105x] mt-2">
             <strong>Budget:</strong> {trip.budget}
           </p>
@@ -63,7 +66,7 @@ export default function TripDetail() {
             <strong>Destination:</strong> {trip.destination}
           </p>
         </div>
-
+        </div>
         {/* Edit Button */}
         <div className="flex ">
           <button className="px-4 py-2 bg-blue-500 text-white rounded text-sm hover:bg-blue-600 transition">
@@ -71,6 +74,7 @@ export default function TripDetail() {
           </button>
         </div>
       </div>
+      
 
        
       <Button
