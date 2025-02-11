@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { FaGoogle } from 'react-icons/fa';
 import { handleGoogleLogin } from '@/util/helper';
-import { useSession } from 'next-auth/react';
 
 export default function SignIn() {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -12,7 +11,6 @@ export default function SignIn() {
   const [flashMessage, setflashMessage] = useState('');
   const [flashMessageType, setflashMessageType] = useState('');
   const router = useRouter();
-  const { data: session } = useSession();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,7 +42,7 @@ export default function SignIn() {
         setflashMessage('Logged in successfully');
         setflashMessageType('success');
         setTimeout(() => {
-          router.push('/');
+          router.push('/dashboard');
         }, 1500);
       } else {
         const errorData = await response.json();
