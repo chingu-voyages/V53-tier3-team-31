@@ -81,7 +81,7 @@ export default function Home() {
                         ></path>
                       </svg>
                       <span>
-                        Local Insights: Discover hidden gems from locals.
+                          Smart Budget Tracker: Estimate your trip expenses to stay within budget.
                       </span>
                     </li>
                     <li className="flex items-center">
@@ -100,8 +100,7 @@ export default function Home() {
                         ></path>
                       </svg>
                       <span>
-                        Real-Time Updates: Stay informed with live travel
-                        alerts.
+                        Weather Updates: Plan ahead with accurate weather insights.
                       </span>
                     </li>
                   </ul>
