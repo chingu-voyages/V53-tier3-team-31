@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Navbar from "../../components/Navbar";
@@ -40,14 +40,37 @@ export default function Dashboard() {
       tripObjId: "679e6ec4189dd60ff447e804",
     },
   ]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    const fetchTrips = async () => {
+      try {
+        const response = await fetch("/api/trips"); // API call to get trips
+        const data = await response.json();
+
+        if (data.success) {
+          setTrips(data.tripList); // Update state with fetched trips
+        } else {
+          setError(data.message || "No trips found.");
+        }
+      } catch (err) {
+        setError("Error fetching trips. Try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTrips();
+  }, []);
 
   return (
     <div
-      className=" min-h-screen font-sans"
+      className="min-h-screen font-sans"
       style={{ backgroundColor: "var(--accent-1)" }}
     >
-      <main className="max-w-6xl mx-auto p-4 ">
+      <main className="max-w-6xl mx-auto p-4">
         <div className="flex justify-start items-center my-6">
           <TripForm
             buttonValue="+ Create New Trip"
@@ -57,17 +80,21 @@ export default function Dashboard() {
           />
         </div>
 
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {trips.map((trip, index) => (
-            <div
-              key={index}
-              style={{ backgroundColor: "var(--gray-3)" }}
-              className=" p-6 rounded shadow flex flex-col justify-between transition-transform duration-300 ease-in-out hover:shadow-lg hover:scale-105"
-            >
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold">{trip.tripname}</h2>
-                <div className="flex space-x-4">
-                  <div>
+        {loading ? (
+          <p className="text-center text-gray-600">Loading trips...</p>
+        ) : error ? (
+          <p className="text-center text-red-600">{error}</p>
+        ) : (
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {trips.map((trip, index) => (
+              <div
+                key={index}
+                style={{ backgroundColor: "var(--gray-3)" }}
+                className="p-6 rounded shadow flex flex-col justify-between transition-transform duration-300 ease-in-out hover:shadow-lg hover:scale-105"
+              >
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-xl font-bold">{trip.tripname}</h2>
+                  <div className="flex space-x-4">
                     <TripForm
                       buttonValue={<FaEdit className="text-xl" />}
                       title="Edit Trip"
@@ -76,38 +103,36 @@ export default function Dashboard() {
                       id={trip.tripObjId}
                       tripInfo={trip}
                     />
-                  </div>
-
-                  <div>
                     <DeleteConfirm
                       buttonValue={<FaTrash className="text-xl" />}
                       id={trip.tripObjId}
                     />
                   </div>
                 </div>
-              </div>
 
-              <div>
-                <p className="text-gray-600">{trip.startDay}</p>
-                <p className="text-gray-600">Budget: {trip.budget}</p>
-                <p className="text-gray-600">Travelers: {trip.travellers}</p>
-              </div>
+                <div>
+                  <p className="text-gray-600">
+                    {new Date(trip.startDay).toLocaleDateString()}
+                  </p>
+                  <p className="text-gray-600">Budget: {trip.budget}</p>
+                  <p className="text-gray-600">Travelers: {trip.travellers}</p>
+                </div>
 
-              <div className="flex justify-between items-center mt-6">
-                <a
-                  href="#"
-                  className="text-green-600 font-medium hover:underline hover:text-green-700 transition-colors duration-300"
-                >
-                  Planning
-                </a>
-
-                <a className="text-blue-600 font-medium hover:underline hover:text-blue-700 transition-colors duration-300 cursor-pointer">
-                  View Details
-                </a>
+                <div className="flex justify-between items-center mt-6">
+                  <a
+                    href="#"
+                    className="text-green-600 font-medium hover:underline hover:text-green-700 transition-colors duration-300"
+                  >
+                    Planning
+                  </a>
+                  <a className="text-blue-600 font-medium hover:underline hover:text-blue-700 transition-colors duration-300 cursor-pointer">
+                    View Details
+                  </a>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </main>
     </div>
   );
