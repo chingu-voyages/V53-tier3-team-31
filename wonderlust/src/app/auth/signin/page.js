@@ -2,8 +2,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { FaGoogle, FaGithub } from 'react-icons/fa';
-import { signIn } from 'next-auth/react';
+import { FaGoogle } from 'react-icons/fa';
+import { handleGoogleLogin } from '@/util/helper';
 
 export default function SignIn() {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -56,13 +56,6 @@ export default function SignIn() {
       setflashMessageType('error');
     } finally {
       setIsSubmitting(false);
-    }
-  };
-  const handleGoogleLogin = async () => {
-    try {
-      signIn('google', { callbackUrl: '/' });
-    } catch (error) {
-      console.error('Google login failed: ', error);
     }
   };
 
