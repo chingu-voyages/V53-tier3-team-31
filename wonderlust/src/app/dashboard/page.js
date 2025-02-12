@@ -62,13 +62,12 @@ export default function Dashboard() {
 
     fetchTrips();
   }, []);
-
   return (
     <div
-      className="min-h-screen font-sans"
+      className=" min-h-screen font-sans"
       style={{ backgroundColor: "var(--accent-1)" }}
     >
-      <main className="max-w-6xl mx-auto p-4">
+      <main className="max-w-6xl mx-auto p-4 ">
         <div className="flex justify-start items-center my-6">
           <TripForm
             buttonValue="+ Create New Trip"
@@ -78,21 +77,17 @@ export default function Dashboard() {
           />
         </div>
 
-        {loading ? (
-          <p className="text-center text-gray-600">Loading trips...</p>
-        ) : error ? (
-          <p className="text-center text-red-600">{error}</p>
-        ) : (
-          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {trips.map((trip, index) => (
-              <div
-                key={index}
-                style={{ backgroundColor: "var(--gray-3)" }}
-                className="p-6 rounded shadow flex flex-col justify-between transition-transform duration-300 ease-in-out hover:shadow-lg hover:scale-105"
-              >
-                <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-xl font-bold">{trip.tripname}</h2>
-                  <div className="flex space-x-4">
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {trips.map((trip, index) => (
+            <div
+              key={index}
+              style={{ backgroundColor: "var(--gray-3)" }}
+              className=" p-6 rounded shadow flex flex-col justify-between transition-transform duration-300 ease-in-out hover:shadow-lg hover:scale-105"
+            >
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-bold">{trip.tripname}</h2>
+                <div className="flex space-x-4">
+                  <div>
                     <TripForm
                       buttonValue={<FaEdit className="text-xl" />}
                       title="Edit Trip"
@@ -101,36 +96,38 @@ export default function Dashboard() {
                       id={trip.tripObjId}
                       tripInfo={trip}
                     />
+                  </div>
+
+                  <div>
                     <DeleteConfirm
                       buttonValue={<FaTrash className="text-xl" />}
                       id={trip.tripObjId}
                     />
                   </div>
                 </div>
-
-                <div>
-                  <p className="text-gray-600">
-                    {new Date(trip.startDay).toLocaleDateString()}
-                  </p>
-                  <p className="text-gray-600">Budget: {trip.budget}</p>
-                  <p className="text-gray-600">Travelers: {trip.travellers}</p>
-                </div>
-
-                <div className="flex justify-between items-center mt-6">
-                  <a
-                    href="#"
-                    className="text-green-600 font-medium hover:underline hover:text-green-700 transition-colors duration-300"
-                  >
-                    Planning
-                  </a>
-                  <a className="text-blue-600 font-medium hover:underline hover:text-blue-700 transition-colors duration-300 cursor-pointer">
-                    View Details
-                  </a>
-                </div>
               </div>
-            ))}
-          </div>
-        )}
+
+              <div>
+                <p className="text-gray-600">{trip.startDay}</p>
+                <p className="text-gray-600">Budget: {trip.budget}</p>
+                <p className="text-gray-600">Travelers: {trip.travellers}</p>
+              </div>
+
+              <div className="flex justify-between items-center mt-6">
+                <a
+                  href="#"
+                  className="text-green-600 font-medium hover:underline hover:text-green-700 transition-colors duration-300"
+                >
+                  Planning
+                </a>
+
+                <a className="text-blue-600 font-medium hover:underline hover:text-blue-700 transition-colors duration-300 cursor-pointer">
+                  View Details
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
       </main>
     </div>
   );
