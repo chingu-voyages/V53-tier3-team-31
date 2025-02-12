@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import Navbar from "../../components/Navbar";
 import TripForm from "@/src/components/TripForm";
 import DeleteConfirm from "@/src/components/DeleteConfirm";
 
@@ -42,7 +41,6 @@ export default function Dashboard() {
   ]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const router = useRouter();
 
   useEffect(() => {
     const fetchTrips = async () => {
