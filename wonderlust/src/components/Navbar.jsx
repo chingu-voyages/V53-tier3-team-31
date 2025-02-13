@@ -2,7 +2,6 @@
 
 import { FaSun } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
-import { jwtDecode } from 'jwt-decode';
 import { CgProfile } from 'react-icons/cg';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -25,20 +24,27 @@ export default function NavBar({ isDark, setIsDark }) {
   const handleLogout = async () => {
     if (session) {
       await signOut({ redirect: false });
-      localStorage.removeItem('wonderlust');
     } else {
-      localStorage.removeItem('wonderlust');
     }
     router.replace('/auth/signin');
   };
-
+  const fetchUser = async () => {
+    fetch('/api/auth/session', {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setUser(data))
+      .catch((error) => console.error('Error:', error));
+  };
   useEffect(() => {
-    const token = localStorage.getItem('wonderlust');
-    if (token) {
-      const decodetoken = jwtDecode(token);
-      setUser(decodetoken);
-    } else {
+    if (session) {
       setUser(session?.user);
+    } else {
+      fetchUser();
     }
   }, [pathname, session]);
 

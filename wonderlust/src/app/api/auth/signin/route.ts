@@ -5,7 +5,7 @@ import { CreateUserDto } from "../../../../../dto/create-user.dto";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from 'jsonwebtoken'
-
+import { serialize } from "cookie";
 
 
 export async function POST(req: NextRequest) {
@@ -26,11 +26,32 @@ console.log(userCheck)
         );
         
         if (passwordMatches) {
-          const token = jwt.sign({ username: userCheck.user,email:userCheck.email,id:userCheck._id }, JWT_SECRET, { expiresIn: '1d' })
-          return NextResponse.json(
-            { message: "Logged in successfully",token },
-            { status: 200 }
-          );
+           const token = jwt.sign({
+            username: userCheck.user,
+            email: userCheck.email,
+            id: userCheck._id
+          },
+          JWT_SECRET,
+          { expiresIn: '1d' })
+          
+
+            const cookie = serialize("wonderlust", token, {
+              httpOnly: true, 
+              secure: true,
+              sameSite: "None",
+              path: "/",
+            });
+          
+            const response= NextResponse.json(
+              { message: "Logged in successfully" },
+              { status: 200 }
+            );
+
+
+           
+  response.headers.set("Set-Cookie", cookie);
+          console.log(response)
+          return response
         }
         return NextResponse.json(
           { message: "Incorrect email or password" },

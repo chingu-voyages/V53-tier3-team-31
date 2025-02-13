@@ -36,8 +36,7 @@ export default function SignIn() {
         },
       });
       if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('wonderlust', data.token);
+        await response.json();
 
         setflashMessage('Logged in successfully');
         setflashMessageType('success');
