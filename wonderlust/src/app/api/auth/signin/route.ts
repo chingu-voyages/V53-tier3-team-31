@@ -50,7 +50,7 @@ console.log(userCheck)
 
            
   response.headers.set("Set-Cookie", cookie);
-          console.log(response)
+         
           return response
         }
         return NextResponse.json(

@@ -2,8 +2,8 @@ import {NextRequest, NextResponse} from "next/server";
 import Trip from '@/models/CreateTrip'
 import { HttpStatusCode } from "axios";
 import connectMongo from "@/util/connect-mongo";
-import mongoose from "mongoose";
-const userId = "6792633eaa08eb6efef02261"
+import User from "@/models/User";
+
 
 export async function PUT(req: NextRequest) {
     try {
@@ -12,15 +12,15 @@ export async function PUT(req: NextRequest) {
     
       const { tripId ,tripname, budget, travellers,
        startDay, endDay,
-       destination} = body;
+       destination,email} = body;
     
-      if (!tripname || !budget || !travellers || !startDay || !endDay || !destination || !userId) {
+      if (!tripname || !budget || !travellers || !startDay || !endDay || !destination || !email) {
         return NextResponse.json(
           { success: false, message: "Missing required fields" },
           { status: HttpStatusCode.BadRequest }
         );
       }
-  
+  const user = await User.findOne({ email })
       const updatedData = 
         {
           tripname:tripname,
@@ -29,7 +29,7 @@ export async function PUT(req: NextRequest) {
           destination: destination,
           startDay: startDay,
           endDay: endDay,
-          user:new mongoose.Types.ObjectId(userId)
+          user:user._id
          }
       const checker = await Trip.findByIdAndUpdate(tripId, updatedData)
       if (checker) {
