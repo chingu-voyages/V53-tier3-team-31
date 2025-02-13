@@ -27,7 +27,7 @@ console.log(userCheck)
         
         if (passwordMatches) {
            const token = jwt.sign({
-            username: userCheck.user,
+            name: userCheck.user,
             email: userCheck.email,
             id: userCheck._id
           },
