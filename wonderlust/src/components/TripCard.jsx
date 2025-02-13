@@ -1,7 +1,7 @@
 import { FaEdit, FaTrash } from "react-icons/fa";
 import TripForm from "./TripForm";
 import DeleteConfirm from "./DeleteConfirm";
-
+import Link from "next/link";
 export default function TripCard({ trip }) {
   return (
     <div
@@ -19,12 +19,17 @@ export default function TripCard({ trip }) {
             id={trip.tripObjId}
             tripInfo={trip}
           />
-          <DeleteConfirm buttonValue={<FaTrash className="text-xl" />} id={trip.tripObjId} />
+          <DeleteConfirm
+            buttonValue={<FaTrash className="text-xl" />}
+            id={trip.tripObjId}
+          />
         </div>
       </div>
 
       <div>
-        <p className="text-gray-600">{new Date(trip.startDay).toLocaleDateString()}</p>
+        <p className="text-gray-600">
+          {new Date(trip.startDay).toLocaleDateString()}
+        </p>
         <p className="text-gray-600">Budget: {trip.budget}</p>
         <p className="text-gray-600">Travelers: {trip.travellers}</p>
       </div>
@@ -36,9 +41,12 @@ export default function TripCard({ trip }) {
         >
           Planning
         </a>
-        <a className="text-blue-600 font-medium hover:underline hover:text-blue-700 transition-colors duration-300 cursor-pointer">
+        <Link
+          href={`dashboard/${trip.tripObjId}`}
+          className="text-blue-600 font-medium hover:underline hover:text-blue-700 transition-colors duration-300"
+        >
           View Details
-        </a>
+        </Link>
       </div>
     </div>
   );
