@@ -1,6 +1,5 @@
 import passport from 'passport';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
-import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import User from '../models/User';
 
 const opts = {
@@ -20,7 +19,6 @@ passport.use(new JwtStrategy(opts, async (jwt_payload, done) => {
     return done(error, false);
   }
 }));
-
 
 
 
