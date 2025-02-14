@@ -1,24 +1,33 @@
-import { NextRequest, NextResponse } from 'next/server';
-import connectMongo from '@/util/connect-mongo';
-import Trip from '@/models/CreateTrip';
+import { NextResponse } from "next/server";
+import Trip from "@/models/CreateTrip";
+import connectMongo from "@/util/connect-mongo";
+import mongoose from "mongoose";
+import { NextRequest } from "next/server";
 
-// Correct way to handle dynamic API routes in Next.js 15
-export async function GET(request: NextRequest, context: { params: { tripId: string } }) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { tripId: string } }
+) {
   try {
     await connectMongo();
 
-    const { tripId } = context.params; // Correctly accessing tripId
+    const { tripId } = params;
 
-    // Find the trip by tripId
-    const trip = await Trip.findOne({ tripObjId: tripId });
-
-    if (!trip) {
-      return NextResponse.json({ message: 'Trip not found' }, { status: 404 });
+    if (!tripId || !mongoose.Types.ObjectId.isValid(tripId)) {
+      return NextResponse.json({ message: "Invalid trip ID" }, { status: 400 });
     }
 
-    return NextResponse.json(trip);
+    const trip = await Trip.findById(tripId);
+    if (!trip) {
+      return NextResponse.json({ message: "Trip not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(trip, { status: 200 });
   } catch (error) {
-    console.error('Error fetching trip:', error);
-    return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
+    console.error("Error fetching trip:", error);
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }
