@@ -43,12 +43,13 @@ const handler = NextAuth( {
     const userExists = await User.findOne({
      email: profile.email,
     });
-    
+    console.log(userExists)
     if (!userExists) {
      await User.create({
       email: profile.email,
       user: profile.name.replace(' ', '').toLowerCase(),
-      image:profile.picture 
+      image: profile.picture,
+      OAuth:true
      })
     }
     return true

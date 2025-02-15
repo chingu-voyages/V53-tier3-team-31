@@ -24,9 +24,10 @@ const UserSchema = new Schema({
     },
     password: {
         type: String,
-        required: function(){return !this.googleId},
+        required: function(){return !this.isOAuth},
     },
-    googleId:{type:String,unique:true,sparse:true}
+    googleId: { type: String, unique: true, sparse: true },
+     isOAuth: { type: Boolean, default: false },
 }, {
     timestamps: true, // Automatically adds createdAt and updatedAt fields
 });
