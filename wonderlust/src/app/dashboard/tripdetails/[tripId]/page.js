@@ -82,10 +82,10 @@ export default function TripDetail() {
           sidebarOpen ? "hidden" : "block"
         }`}
       >
-        <div className="flex items-center justify-between p-6 shadow-md  h-[35vh] ">
+        <div className="flex flex-col md:flex-row items-center justify-between p-6 shadow-md h-auto md:h-[35vh]">
           {/* Image Block */}
-          <div className="flex-1 h-[80%] bg-[var(--gray-2)] rounded-lg flex ">
-            <image
+          <div className="w-full md:w-1/3 h-[200px] md:h-full bg-[var(--gray-2)] rounded-lg mb-4 md:mb-0 flex">
+            <img
               src="https://via.placeholder.com/150/000000/FFFFFF/?text=Photo"
               alt="TripImage"
               className="object-cover w-full h-full rounded-lg"
@@ -93,26 +93,29 @@ export default function TripDetail() {
           </div>
 
           {/* Trip Info Block */}
-          <div className="flex flex-col flex-1">
-            <h2 className="text-[20px] font-bold flex">{trip.tripname}</h2>
-
-            <div className="flex flex-col flex-1   px-8">
-              <p className="text-[105x] mt-2">
+          <div className="flex flex-col flex-1 md:px-8">
+            <div className="flex items-center justify-between">
+              <h2 className="text-[1.2rem] md:text-base lg:text-[2rem] font-bold">
+                {trip.tripname}
+              </h2>
+              {/* Edit Button with Icon */}
+              <button className="flex items-center px-4 py-2 ml-5 bg-blue-500 text-white rounded-full text-sm hover:bg-blue-600 transition">
+                Edit
+              </button>
+            </div>
+            <div className="flex flex-col mt-2">
+              <p className="text-[1rem] md:text-base lg:text-lg">
+                {" "}
+                {/* Small on mobile, base on medium, large on large */}
                 <strong>Budget:</strong> {trip.budget}
               </p>
-              <p className="text-[15px] mt-2">
+              <p className="text-[1rem] md:text-base lg:text-lg">
                 <strong>Travelers:</strong> {trip.travellers}
               </p>
-              <p className="text-[15px] mt-2">
+              <p className="text-[1rem] md:text-base lg:text-lg ">
                 <strong>Destination:</strong> {trip.destination}
               </p>
             </div>
-          </div>
-          {/* Edit Button */}
-          <div className="flex ">
-            <button className="px-4 py-2 bg-blue-500 text-white rounded text-sm hover:bg-blue-600 transition">
-              Edit
-            </button>
           </div>
         </div>
 
@@ -138,8 +141,8 @@ export default function TripDetail() {
               <path
                 d="M10 6.5C10 8.433 8.433 10 6.5 10C4.567 10 3 8.433 3 6.5C3 4.567 4.567 3 6.5 3C8.433 3 10 4.567 10 6.5ZM9.30884 10.0159C8.53901 10.6318 7.56251 11 6.5 11C4.01472 11 2 8.98528 2 6.5C2 4.01472 4.01472 2 6.5 2C8.98528 2 11 4.01472 11 6.5C11 7.56251 10.6318 8.53901 10.0159 9.30884L12.8536 12.1464C13.0488 12.3417 13.0488 12.6583 12.8536 12.8536C12.6583 13.0488 12.3417 13.0488 12.1464 12.8536L9.30884 10.0159Z"
                 fill="currentColor"
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
               ></path>
             </svg>
           </TextField.Slot>
