@@ -4,7 +4,28 @@ import { useState, useEffect } from "react";
 import TripForm from "@/src/components/TripForm";
 import TripCard from "../../components/TripCard";
 export default function Dashboard() {
-  const [trips, setTrips] = useState([]);
+  const [trips, setTrips] = useState([
+    {
+      tripname: "Beach Getaway",
+      destination: "Delhi",
+      budget: "2000",
+      travellers: "3",
+      startDay: "2025-07-01T00:00:00.000Z",
+      endDay: "2025-07-10T00:00:00.000Z",
+      user: "6792633eaa08eb6efef02261",
+      tripObjId: "679e6e05189dd60ff447e7fd",
+    },
+    {
+      tripname: "Sample Card 2",
+      destination: "Delhi",
+      budget: "2000",
+      travellers: "3",
+      startDay: "2025-07-01T00:00:00.000Z",
+      endDay: "2025-07-10T00:00:00.000Z",
+      user: "6792633eaa08eb6efef02261",
+      tripObjId: "679e6e05189dd60ff447e7ff",
+    },
+  ]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
