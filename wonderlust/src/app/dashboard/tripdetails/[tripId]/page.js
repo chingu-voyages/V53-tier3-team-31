@@ -102,13 +102,13 @@ export default function TripDetail() {
 
           {/* Trip Info Block */}
           <div className="flex flex-col w-full h-auto  flex-1 md:px-8">
-            <div className="flex w-full items-center justify-between mb-4">
-              <h2 className="text-3xl md:text-base lg:text-[2rem] font-bold">
+            <div className="flex w-full justify-between mb-4">
+              <h2 className="lg:text-3xl md:text-base font-bold">
                 {trip.tripname}
               </h2>
               {/* Edit Button with Icon */}
               <button
-                className="flex items-center px-6 py-2 ml-5 bg-teal-500 text-white rounded-md text-sm hover:bg-teal-400 transition"
+                className="w-[205px] h-10 text-center  py-2 bg-teal-500 text-white rounded-md text-sm hover:bg-teal-400 transition"
                 onClick={() => setShow(!show)}
               >
                 Add Destination

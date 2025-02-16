@@ -9,7 +9,7 @@ function DraggableTags({ show, id, trip, userId }) {
       setTags(trip.destination);
     }
   }, [trip]);
-  console.log(trip);
+
   const handleInputChange = async (event) => {
     setNewTagText(event.target.value);
   };
