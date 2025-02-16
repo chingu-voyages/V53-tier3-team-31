@@ -4,15 +4,12 @@ import { HttpStatusCode } from "axios";
 import connectMongo from "@/util/connect-mongo";
 import mongoose from "mongoose";
 
-// Get somehow the user objectID here using middleware
-const tempUserID = "6792633eaa08eb6efef02261" 
 
 export async function DELETE(req: NextRequest) {
     try {
       await connectMongo();
-      const { tripId } = await req.json();
-  
-      const tripCheck = await Trip.findOne({_id: new mongoose.Types.ObjectId(tripId), user: new mongoose.Types.ObjectId(tempUserID)})
+      const { tripId,userId } = await req.json();
+      const tripCheck = await Trip.findOne({_id: new mongoose.Types.ObjectId(tripId), user: new mongoose.Types.ObjectId(userId)})
       
       if (tripCheck) {
          await Trip.findByIdAndDelete(tripId);
