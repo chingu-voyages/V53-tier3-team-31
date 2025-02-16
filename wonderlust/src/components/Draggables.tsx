@@ -103,7 +103,7 @@ function DraggableTags({ show, id, trip, userId }) {
               borderRadius: '5px',
               cursor: 'move',
             }}
-            className="text-lg font-normal"
+            className="text-sm md:text-lg font-normal"
           >
             {tag}
           </div>
