@@ -1,12 +1,12 @@
-import { FaEdit, FaTrash } from "react-icons/fa";
-import TripForm from "./TripForm";
-import DeleteConfirm from "./DeleteConfirm";
-import Link from "next/link";
+import { FaEdit, FaTrash } from 'react-icons/fa';
+import TripForm from './TripForm';
+import DeleteConfirm from './DeleteConfirm';
+import Link from 'next/link';
 
 export default function TripCard({ trip }) {
   return (
     <div
-      style={{ backgroundColor: "var(--gray-3)" }}
+      style={{ backgroundColor: 'var(--gray-3)' }}
       className="p-6 rounded shadow flex flex-col justify-between transition-transform duration-300 ease-in-out hover:shadow-lg hover:scale-105"
     >
       <div className="flex justify-between items-center mb-4">
@@ -17,7 +17,7 @@ export default function TripCard({ trip }) {
             title="Edit Trip"
             actionTitle="Save Trip"
             action="edit"
-            id={trip.tripObjId}
+            id={trip._id}
             tripInfo={trip}
           />
           <DeleteConfirm
@@ -43,7 +43,7 @@ export default function TripCard({ trip }) {
           Planning
         </a>
         <Link
-          href={`/dashboard/tripdetails/${trip.tripObjId}`}
+          href={`/dashboard/tripdetails/${trip._id}`}
           className="text-blue-600 font-medium hover:underline hover:text-blue-700 transition-colors duration-300"
         >
           View Details
