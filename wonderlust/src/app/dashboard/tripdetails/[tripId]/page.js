@@ -1,14 +1,14 @@
-"use client";
-import { useState, useEffect } from "react";
-import { TextField } from "@radix-ui/themes";
-import Sidebar from "@/src/components/Sidebar";
-import Accomodation from "@/src/components/TripDetails/Accomodation";
-import Transport from "@/src/components/TripDetails/Transport";
-import Loactions from "@/src/components/TripDetails/Locations";
-import Timeline from "@/src/components/Timeline";
-import SearchResultCard from "@/src/components/SearchResultCard";
-import { useParams } from "next/navigation";
-import Image from "next/image";
+'use client';
+import { useState, useEffect } from 'react';
+import { TextField } from '@radix-ui/themes';
+import Sidebar from '@/src/components/Sidebar';
+import Accomodation from '@/src/components/TripDetails/Accomodation';
+import Transport from '@/src/components/TripDetails/Transport';
+import Loactions from '@/src/components/TripDetails/Locations';
+import Timeline from '@/src/components/Timeline';
+import SearchResultCard from '@/src/components/SearchResultCard';
+import { useParams } from 'next/navigation';
+import Image from 'next/image';
 
 export default function TripDetail() {
   const [trip, setTrip] = useState(null);
@@ -19,25 +19,25 @@ export default function TripDetail() {
     // Manual trips data
     const trips = [
       {
-        tripname: "Beach Getaway",
-        destination: "Delhi",
-        budget: "2000",
-        travellers: "3",
-        startDay: "2025-07-01T00:00:00.000Z",
-        endDay: "2025-07-10T00:00:00.000Z",
-        user: "6792633eaa08eb6efef02261",
-        tripObjId: "679e6e05189dd60ff447e7fd",
+        tripname: 'Beach Getaway',
+        destination: 'Delhi',
+        budget: '2000',
+        travellers: '3',
+        startDay: '2025-07-01T00:00:00.000Z',
+        endDay: '2025-07-10T00:00:00.000Z',
+        user: '6792633eaa08eb6efef02261',
+        tripObjId: '679e6e05189dd60ff447e7fd',
         locations: [],
       },
       {
-        tripname: "Sample Card 2",
-        destination: "Delhi",
-        budget: "2000",
-        travellers: "3",
-        startDay: "2025-07-01T00:00:00.000Z",
-        endDay: "2025-07-10T00:00:00.000Z",
-        user: "6792633eaa08eb6efef02261",
-        tripObjId: "679e6e05189dd60ff447e7ff",
+        tripname: 'Sample Card 2',
+        destination: 'Delhi',
+        budget: '2000',
+        travellers: '3',
+        startDay: '2025-07-01T00:00:00.000Z',
+        endDay: '2025-07-10T00:00:00.000Z',
+        user: '6792633eaa08eb6efef02261',
+        tripObjId: '679e6e05189dd60ff447e7ff',
         locations: [],
       },
     ];
@@ -49,12 +49,12 @@ export default function TripDetail() {
 
   const events = [
     {
-      title: "Transportation Medium",
-      date: "Jan 10, 2024",
-      description: "Train",
+      title: 'Transportation Medium',
+      date: 'Jan 10, 2024',
+      description: 'Train',
     },
     Accomodation(sidebarOpen, setSidebarOpen),
-    { title: "Places to visit", date: "Jan 13, 2024", description: "" },
+    { title: 'Places to visit', date: 'Jan 13, 2024', description: '' },
   ];
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export default function TripDetail() {
           setTrip(data.trip); // Set the fetched trip data
         }
       } catch (error) {
-        console.error("Error fetching trip details:", error);
+        console.error('Error fetching trip details:', error);
       }
     };
 
@@ -79,48 +79,53 @@ export default function TripDetail() {
     <div>
       <div
         className={`w-full md:w-2/3 md:block ${
-          sidebarOpen ? "hidden" : "block"
+          sidebarOpen ? 'hidden' : 'block'
         }`}
       >
         <div className="flex flex-col md:flex-row items-center justify-between p-6 shadow-md h-auto md:h-[35vh]">
           {/* Image Block */}
           <div className="w-full md:w-1/3 h-[200px] md:h-full bg-[var(--gray-2)] rounded-lg mb-4 md:mb-0 flex">
-            <img
-              src="https://via.placeholder.com/150/000000/FFFFFF/?text=Photo"
-              alt="TripImage"
+            <Image
+              src="/japan.jpg"
+              width={200}
+              height={200}
+              alt="Picture of Trip"
               className="object-cover w-full h-full rounded-lg"
             />
           </div>
 
           {/* Trip Info Block */}
-          <div className="flex flex-col flex-1 md:px-8">
-            <div className="flex items-center justify-between">
-              <h2 className="text-[1.2rem] md:text-base lg:text-[2rem] font-bold">
+          <div className="flex flex-col w-full flex-1 md:px-8">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-3xl md:text-base lg:text-[2rem] font-bold">
                 {trip.tripname}
               </h2>
               {/* Edit Button with Icon */}
-              <button className="flex items-center px-4 py-2 ml-5 bg-blue-500 text-white rounded-full text-sm hover:bg-blue-600 transition">
+              <button className="flex items-center px-6 py-2 ml-5 bg-blue-500 text-white rounded-md text-sm hover:bg-blue-400 transition">
                 Edit
               </button>
             </div>
             <div className="flex flex-col mt-2">
-              <p className="text-[1rem] md:text-base lg:text-lg">
-                {" "}
-                {/* Small on mobile, base on medium, large on large */}
-                <strong>Budget:</strong> {trip.budget}
+              <p className="text-[1rem] md:text-base lg:text-lg text-gray-500">
+                {' '}
+                <span className="font-semibold text-gray-700">Budget:</span> $
+                {trip.budget}
               </p>
-              <p className="text-[1rem] md:text-base lg:text-lg">
-                <strong>Travelers:</strong> {trip.travellers}
+              <p className="text-[1rem] md:text-base lg:text-lg text-gray-500">
+                <span className="text-gray-700 font-semibold">Travelers:</span>{' '}
+                {trip.travellers}
               </p>
-              <p className="text-[1rem] md:text-base lg:text-lg ">
-                <strong>Destination:</strong> {trip.destination}
+              <p className="text-[1rem] md:text-base lg:text-lg text-gray-500 capitalize">
+                <span className="font-semibold text-gray-700">
+                  Destination:
+                </span>{' '}
+                {trip.destination}
               </p>
             </div>
           </div>
         </div>
 
         <div className="p-6 shadow-md ">
-          {/* <Accomodation setSidebarOpen={setSidebarOpen}/> */}
           <Timeline>
             <Accomodation setSidebarOpen={setSidebarOpen} />
             <Transport setSidebarOpen={setSidebarOpen} />
@@ -152,7 +157,6 @@ export default function TripDetail() {
 
         <SearchResultCard />
       </Sidebar>
-      {/* Timeline div */}
     </div>
   );
 }
