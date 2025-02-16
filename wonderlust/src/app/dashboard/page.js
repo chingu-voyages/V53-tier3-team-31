@@ -48,7 +48,7 @@ export default function Dashboard() {
     if (!user?.id) return;
     fetchTrips();
   }, [user]);
-  console.log(user?.id, trips);
+
   return (
     <>
       <main
