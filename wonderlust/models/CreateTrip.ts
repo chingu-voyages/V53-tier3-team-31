@@ -17,7 +17,7 @@ const TripSchema = new Schema({
   minLength: [3, 'tripname must be at least 3 characters long'],
  },
  destination: {
-  type: String,
+  type: Array,
   required: [true, 'destination is required'],
 
   minLength: [3, 'destination must be at least 3 characters long'],

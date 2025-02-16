@@ -5,8 +5,7 @@ import Trip from "@/models/CreateTrip";
 export async function GET(req, { params }) {
   try {
     await connectMongo();
-    const { tripId } = params;
-
+    const { tripId } = await params;
     const trip = await Trip.findById(tripId);
     if (!trip) {
       return NextResponse.json(
