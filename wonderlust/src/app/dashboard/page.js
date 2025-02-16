@@ -4,31 +4,51 @@ import { useState, useEffect } from 'react';
 import TripForm from '@/src/components/TripForm';
 import TripCard from '../../components/TripCard';
 import Loading from '@/src/components/Loading';
+
 export default function Dashboard() {
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [user, setUser] = useState(null);
 
+  const fetchUser = async () => {
+    fetch('/api/auth/me', {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setUser(data.user))
+      .catch((error) => console.error('Error:', error));
+  };
   useEffect(() => {
-    const fetchTrips = async () => {
-      try {
-        const response = await fetch('/api/trips'); // API call to get trips
-        const data = await response.json();
-
-        if (data.success) {
-          setTrips(data.tripList); // Update state with fetched trips
-        } else {
-          setError(data.message || 'No trips found.');
-        }
-      } catch (err) {
-        setError('Error fetching trips. Try again later.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTrips();
+    fetchUser();
   }, []);
+  const fetchTrips = async () => {
+    try {
+      const response = await fetch(`/api/trips?userId=${user?.id}`, {
+        method: 'GET',
+      }); // API call to get trips
+      const data = await response.json();
+
+      if (data.success) {
+        setTrips(data.tripList); // Update state with fetched trips
+      } else {
+        setError(data.message || 'No trips found.');
+      }
+    } catch (err) {
+      setError('Error fetching trips. Try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    if (!user?.id) return;
+    fetchTrips();
+  }, [user]);
+  console.log(user?.id, trips);
   return (
     <>
       <main

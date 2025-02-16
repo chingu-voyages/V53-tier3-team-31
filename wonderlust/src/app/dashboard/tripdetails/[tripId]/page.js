@@ -78,7 +78,7 @@ export default function TripDetail() {
     fetchUser();
     fetchTrip();
   }, [tripId, pathname]);
-  console.log(user);
+
   if (!trip) return <Loading />;
 
   return (

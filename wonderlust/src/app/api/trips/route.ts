@@ -2,17 +2,16 @@ import {NextRequest, NextResponse} from "next/server";
 import Trip from '@/models/CreateTrip'
 import { HttpStatusCode } from "axios";
 import connectMongo from "@/util/connect-mongo";
-import mongoose from "mongoose";
-
-// Get somehow the user objectID here using middleware
-const tempUserID = "6792633eaa08eb6efef02261" 
 
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextRequest,) {
   try {
     await connectMongo();
-    const tripList = await Trip.find({ user: new mongoose.Types.ObjectId(tempUserID) });
-    console.log(tripList)
+    const { searchParams } =  new URL(req.url);
+    
+    const userId = searchParams.get("userId");
+    
+    const tripList = await Trip.find({ user: userId });
     if (tripList.length > 0){
     return NextResponse.json({
        success: true,
