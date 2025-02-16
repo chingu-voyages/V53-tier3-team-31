@@ -7,73 +7,78 @@ import Transport from '@/src/components/TripDetails/Transport';
 import Loactions from '@/src/components/TripDetails/Locations';
 import Timeline from '@/src/components/Timeline';
 import SearchResultCard from '@/src/components/SearchResultCard';
-import { useParams } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Loading from '@/src/components/Loading';
+import DraggableTags from '@/src/components/Draggables';
 
 export default function TripDetail() {
   const [trip, setTrip] = useState(null);
+  const [user, setUser] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { tripId } = useParams();
+  const pathname = usePathname();
+  const [show, setShow] = useState(false);
+  const trips = [
+    {
+      tripname: 'Beach Getaway',
+      destination: 'Delhi',
+      budget: '2000',
+      travellers: '3',
+      startDay: '2025-07-01T00:00:00.000Z',
+      endDay: '2025-07-10T00:00:00.000Z',
+      user: '6792633eaa08eb6efef02261',
+      tripObjId: '679e6e05189dd60ff447e7fd',
+      locations: [],
+    },
+    {
+      tripname: 'Sample Card 2',
+      destination: 'Delhi',
+      budget: '2000',
+      travellers: '3',
+      startDay: '2025-07-01T00:00:00.000Z',
+      endDay: '2025-07-10T00:00:00.000Z',
+      user: '6792633eaa08eb6efef02261',
+      tripObjId: '679e6e05189dd60ff447e7ff',
+      locations: [],
+    },
+  ];
+
+  const fetchUser = async () => {
+    fetch('/api/auth/me', {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setUser(data.user))
+      .catch((error) => console.error('Error:', error));
+  };
 
   useEffect(() => {
-    // Manual trips data
-    const trips = [
-      {
-        tripname: 'Beach Getaway',
-        destination: 'Delhi',
-        budget: '2000',
-        travellers: '3',
-        startDay: '2025-07-01T00:00:00.000Z',
-        endDay: '2025-07-10T00:00:00.000Z',
-        user: '6792633eaa08eb6efef02261',
-        tripObjId: '679e6e05189dd60ff447e7fd',
-        locations: [],
-      },
-      {
-        tripname: 'Sample Card 2',
-        destination: 'Delhi',
-        budget: '2000',
-        travellers: '3',
-        startDay: '2025-07-01T00:00:00.000Z',
-        endDay: '2025-07-10T00:00:00.000Z',
-        user: '6792633eaa08eb6efef02261',
-        tripObjId: '679e6e05189dd60ff447e7ff',
-        locations: [],
-      },
-    ];
-
     // Find the trip matching tripId from URL
     const selectedTrip = trips.find((t) => t.tripObjId === tripId);
     setTrip(selectedTrip);
   }, [tripId]);
 
-  const events = [
-    {
-      title: 'Transportation Medium',
-      date: 'Jan 10, 2024',
-      description: 'Train',
-    },
-    Accomodation(sidebarOpen, setSidebarOpen),
-    { title: 'Places to visit', date: 'Jan 13, 2024', description: '' },
-  ];
-
   useEffect(() => {
     const fetchTrip = async () => {
       try {
-        const response = await fetch(`/api/trips/${tripId}`); // Fetch the trip details
+        const response = await fetch(`/api/trips/${tripId}`);
         const data = await response.json();
         if (data.success) {
-          setTrip(data.trip); // Set the fetched trip data
+          setTrip(data.trip);
         }
       } catch (error) {
         console.error('Error fetching trip details:', error);
       }
     };
-
+    fetchUser();
     fetchTrip();
-  }, [tripId]);
-
+  }, [tripId, pathname]);
+  console.log(user);
   if (!trip) return <Loading />;
 
   return (
@@ -83,7 +88,7 @@ export default function TripDetail() {
           sidebarOpen ? 'hidden' : 'block'
         }`}
       >
-        <div className="flex flex-col md:flex-row items-center justify-between p-6 shadow-md h-auto md:h-[35vh]">
+        <div className="flex flex-col md:flex-row items-center justify-between px-6 shadow-md h-auto  mt-10 py-10">
           {/* Image Block */}
           <div className="w-full md:w-1/3 h-[200px] md:h-full bg-[var(--gray-2)] rounded-lg mb-4 md:mb-0 flex">
             <Image
@@ -96,17 +101,23 @@ export default function TripDetail() {
           </div>
 
           {/* Trip Info Block */}
-          <div className="flex flex-col w-full flex-1 md:px-8">
-            <div className="flex items-center justify-between mb-4">
+          <div className="flex flex-col w-full h-auto  flex-1 md:px-8">
+            <div className="flex w-full items-center justify-between mb-4">
               <h2 className="text-3xl md:text-base lg:text-[2rem] font-bold">
                 {trip.tripname}
               </h2>
               {/* Edit Button with Icon */}
-              <button className="flex items-center px-6 py-2 ml-5 bg-blue-500 text-white rounded-md text-sm hover:bg-blue-400 transition">
-                Edit
+              <button
+                className="flex items-center px-6 py-2 ml-5 bg-teal-500 text-white rounded-md text-sm hover:bg-teal-400 transition"
+                onClick={() => setShow(!show)}
+              >
+                Add Destination
               </button>
             </div>
-            <div className="flex flex-col mt-2 " style={{ color: '--gray-12' }}>
+            <div
+              className="flex w-full flex-col mt-2 "
+              style={{ color: '--gray-12' }}
+            >
               <p className="text-[1rem] md:text-base lg:text-lg ">
                 {' '}
                 <span className="font-semibold ">Budget: </span>
@@ -116,10 +127,15 @@ export default function TripDetail() {
                 <span className=" font-semibold">Travelers: </span>{' '}
                 {trip.travellers}
               </p>
-              <p className="text-[1rem] md:text-base lg:text-lg  capitalize">
-                <span className="font-semibold ">Destination: </span>{' '}
-                {trip.destination}
-              </p>
+              <div className="text-[1rem] md:text-base lg:text-lg  capitalize">
+                <span className="font-semibold ">Destinations: </span>{' '}
+                <DraggableTags
+                  show={show}
+                  id={tripId}
+                  trip={trip}
+                  userId={user?.id}
+                />
+              </div>
             </div>
           </div>
         </div>

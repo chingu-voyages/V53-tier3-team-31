@@ -138,7 +138,7 @@ export default function NavBar({ isDark, setIsDark }) {
           <button className="bg-white text-blue-500 px-4 py-2 rounded shadow transition-transform duration-300 hover:bg-gray-100 hover:scale-105">
             <Link
               href="/auth/signin"
-              className="hover:text-blue-800 font-semibold"
+              className="hover:text-blue-800 font-semibold capitalize"
             >
               {' '}
               Login

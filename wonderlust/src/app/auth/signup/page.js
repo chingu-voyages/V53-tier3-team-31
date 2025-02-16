@@ -142,12 +142,12 @@ export default function SignUp() {
             Register
           </button>
         </form>
-        <button
+        {/* <button
           className="px-2 w-full py-2 rounded-lg my-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold  flex items-center justify-center gap-3"
           onClick={() => handleGoogleLogin()}
         >
           <FaGoogle /> Continue with Google
-        </button>
+        </button> */}
       </div>
     </div>
   );
