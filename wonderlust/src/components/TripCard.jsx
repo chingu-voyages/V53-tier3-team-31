@@ -3,7 +3,7 @@ import TripForm from './TripForm';
 import DeleteConfirm from './DeleteConfirm';
 import Link from 'next/link';
 
-export default function TripCard({ trip }) {
+export default function TripCard({ trip, userId }) {
   return (
     <div
       style={{ backgroundColor: 'var(--gray-3)' }}
@@ -22,7 +22,8 @@ export default function TripCard({ trip }) {
           />
           <DeleteConfirm
             buttonValue={<FaTrash className="text-sm" />}
-            id={trip.tripObjId}
+            id={trip._id}
+            userId={userId}
           />
         </div>
       </div>

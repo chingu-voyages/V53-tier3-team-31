@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Dialog, Button } from '@radix-ui/themes';
 import FlashMessages from './FlashMessages';
 
-const DeleteConfirm = ({ buttonValue, id }) => {
+const DeleteConfirm = ({ buttonValue, id, userId }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [flashMessage, setflashMessage] = useState('');
   const [flashMessageType, setflashMessageType] = useState('');
@@ -14,6 +14,7 @@ const DeleteConfirm = ({ buttonValue, id }) => {
         method: 'DELETE',
         body: JSON.stringify({
           tripId: id,
+          userId,
         }),
         headers: {
           'Content-Type': 'application/json',
