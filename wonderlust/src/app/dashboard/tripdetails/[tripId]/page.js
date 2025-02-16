@@ -9,6 +9,7 @@ import Timeline from '@/src/components/Timeline';
 import SearchResultCard from '@/src/components/SearchResultCard';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
+import Loading from '@/src/components/Loading';
 
 export default function TripDetail() {
   const [trip, setTrip] = useState(null);
@@ -73,7 +74,7 @@ export default function TripDetail() {
     fetchTrip();
   }, [tripId]);
 
-  if (!trip) return <div>Loading...</div>;
+  if (!trip) return <Loading />;
 
   return (
     <div>
@@ -105,20 +106,18 @@ export default function TripDetail() {
                 Edit
               </button>
             </div>
-            <div className="flex flex-col mt-2">
-              <p className="text-[1rem] md:text-base lg:text-lg text-gray-500">
+            <div className="flex flex-col mt-2 " style={{ color: '--gray-12' }}>
+              <p className="text-[1rem] md:text-base lg:text-lg ">
                 {' '}
-                <span className="font-semibold text-gray-700">Budget:</span> $
+                <span className="font-semibold ">Budget: </span>
                 {trip.budget}
               </p>
-              <p className="text-[1rem] md:text-base lg:text-lg text-gray-500">
-                <span className="text-gray-700 font-semibold">Travelers:</span>{' '}
+              <p className="text-[1rem] md:text-base lg:text-lg ">
+                <span className=" font-semibold">Travelers: </span>{' '}
                 {trip.travellers}
               </p>
-              <p className="text-[1rem] md:text-base lg:text-lg text-gray-500 capitalize">
-                <span className="font-semibold text-gray-700">
-                  Destination:
-                </span>{' '}
+              <p className="text-[1rem] md:text-base lg:text-lg  capitalize">
+                <span className="font-semibold ">Destination: </span>{' '}
                 {trip.destination}
               </p>
             </div>

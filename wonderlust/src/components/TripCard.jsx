@@ -7,13 +7,13 @@ export default function TripCard({ trip }) {
   return (
     <div
       style={{ backgroundColor: 'var(--gray-3)' }}
-      className="p-6 rounded shadow flex flex-col justify-between transition-transform duration-300 ease-in-out hover:shadow-lg hover:scale-105"
+      className="p-6 rounded-md shadow-sm flex flex-col justify-between transition-transform duration-300 ease-in-out hover:shadow-lg hover:scale-100"
     >
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between mb-4">
         <h2 className="text-xl font-bold">{trip.tripname}</h2>
-        <div className="flex space-x-4">
+        <div className="flex space-x-2">
           <TripForm
-            buttonValue={<FaEdit className="text-xl" />}
+            buttonValue={<FaEdit className="text-sm" />}
             title="Edit Trip"
             actionTitle="Save Trip"
             action="edit"
@@ -21,30 +21,36 @@ export default function TripCard({ trip }) {
             tripInfo={trip}
           />
           <DeleteConfirm
-            buttonValue={<FaTrash className="text-xl" />}
+            buttonValue={<FaTrash className="text-sm" />}
             id={trip.tripObjId}
           />
         </div>
       </div>
 
-      <div>
-        <p className="text-gray-600">
+      <div style={{ color: '--gray-12' }}>
+        <p className="">
+          <span className="font-semibold">Budget: </span>
+          {trip.budget}
+        </p>
+        <p className="">
+          <span className="font-semibold">Travelers: </span> {trip.travellers}
+        </p>
+        <p className="text-[12px] mt-3">
+          <span className="font-semibold"> Date:</span>{' '}
           {new Date(trip.startDay).toLocaleDateString()}
         </p>
-        <p className="text-gray-600">Budget: {trip.budget}</p>
-        <p className="text-gray-600">Travelers: {trip.travellers}</p>
       </div>
 
       <div className="flex justify-between items-center mt-6">
         <a
           href="#"
-          className="text-green-600 font-medium hover:underline hover:text-green-700 transition-colors duration-300"
+          className="text-green-600 font-medium hover:underline  transition-colors duration-300"
         >
           Planning
         </a>
         <Link
           href={`/dashboard/tripdetails/${trip._id}`}
-          className="text-blue-600 font-medium hover:underline hover:text-blue-700 transition-colors duration-300"
+          className="text-blue-600 font-medium  hover:text-blue-800 hover:bg-white/80 transition-colors duration-300 bg-white px-3 py-2 rounded-sm"
         >
           View Details
         </Link>
