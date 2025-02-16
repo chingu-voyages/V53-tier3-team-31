@@ -120,8 +120,7 @@ export default function TripDetail() {
             >
               <p className="text-[1rem] md:text-base lg:text-lg ">
                 {' '}
-                <span className="font-semibold ">Budget: </span>
-                {trip.budget}
+                <span className="font-semibold ">Budget: </span>${trip.budget}
               </p>
               <p className="text-[1rem] md:text-base lg:text-lg ">
                 <span className=" font-semibold">Travelers: </span>{' '}
