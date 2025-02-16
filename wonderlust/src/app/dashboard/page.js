@@ -65,6 +65,7 @@ export default function Dashboard() {
                 title="Create New Trip"
                 actionTitle="Create Trip"
                 action="new"
+                userId={user?.id}
               />
             </div>
 

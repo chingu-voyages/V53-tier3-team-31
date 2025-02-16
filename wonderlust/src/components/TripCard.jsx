@@ -29,8 +29,7 @@ export default function TripCard({ trip }) {
 
       <div style={{ color: '--gray-12' }}>
         <p className="">
-          <span className="font-semibold">Budget: </span>
-          {trip.budget}
+          <span className="font-semibold">Budget: </span>${trip.budget}
         </p>
         <p className="">
           <span className="font-semibold">Travelers: </span> {trip.travellers}

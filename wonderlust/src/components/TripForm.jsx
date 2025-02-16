@@ -9,6 +9,7 @@ const TripForm = ({
   action,
   id = '',
   tripInfo = '',
+  userId,
 }) => {
   const [formData, setFormData] = useState({
     tripname: '',
@@ -51,6 +52,7 @@ const TripForm = ({
         method: method,
         body: JSON.stringify({
           tripId: id,
+          userId,
           ...formData,
         }),
         headers: {
