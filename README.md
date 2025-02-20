@@ -72,5 +72,5 @@ The application will be available at http://localhost:3005
 - Suhani Shaikh #1: [GitHub](https://github.com/Suhanii-13) 
 - Ademola Kujore #2: [GitHub](https://github.com/Dhemmyhardy) / [LinkedIn](https://www.linkedin.com/in/tundeademolakujore)
 - Umesh Sharma #3: [GitHub](https://github.com/Omeshcoding) / [LinkedIn](https://www.linkedin.com/in/umesh-sharma-aa6674131/)
-- Teammate name #n: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+- Arshpreet Singh #4: [GitHub](https://github.com/goldgroove06)
 - Teammate name #n: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
